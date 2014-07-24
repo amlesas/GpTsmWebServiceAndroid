@@ -1,6 +1,6 @@
 package org.mbds.wolf.tsm.gp.systems.messaging2_1_0;
 
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.OperationResult;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.OperationResult;
 
 //----------------------------------------------------
 //

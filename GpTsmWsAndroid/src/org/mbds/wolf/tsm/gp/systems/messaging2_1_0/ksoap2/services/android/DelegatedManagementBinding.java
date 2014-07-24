@@ -16,15 +16,16 @@ package org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.android;
 
 import java.util.List;
 
+
 import org.ksoap2.HeaderProperty;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.transport.HttpTransportSE;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.IServiceEvents;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.OperationResult;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.ExtendedSoapSerializationEnvelope;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions.IFunc;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.OperationResult;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.GenerateDMTokenRequestType;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.responses.GenerateDMTokenResponseType;
 
@@ -42,7 +43,7 @@ public class DelegatedManagementBinding
 
     int timeOut=60000;
     public List< HeaderProperty> httpHeaders;
-    public boolean enableLogging;
+    public boolean enableLogging = true;
 
     IServiceEvents callback;
 //    public DelegatedManagementBinding(){}
@@ -113,7 +114,7 @@ public class DelegatedManagementBinding
         return null;
     }
     
-    public GenerateDMTokenResponseType GenerateDMToken(final GenerateDMTokenRequestType GenerateDMTokenRequest ) throws java.lang.Exception
+    private GenerateDMTokenResponseType GenerateDMToken(final GenerateDMTokenRequestType GenerateDMTokenRequest ) throws java.lang.Exception
     {
         return (GenerateDMTokenResponseType)execute(new IWcfMethod()
         {
@@ -129,21 +130,24 @@ public class DelegatedManagementBinding
             public java.lang.Object ProcessResult(ExtendedSoapSerializationEnvelope __envelope,java.lang.Object __result)throws java.lang.Exception {
                 return (GenerateDMTokenResponseType)getResult(GenerateDMTokenResponseType.class,__result,"GenerateDMTokenResponse",__envelope);
             }
-        },"");
+        },"GenerateDMToken");
     }
     
     public android.os.AsyncTask GenerateDMTokenAsync(final GenerateDMTokenRequestType GenerateDMTokenRequest)
     {
-        return executeAsync(new Functions.IFunc< GenerateDMTokenResponseType>() {
-            public GenerateDMTokenResponseType Func() throws java.lang.Exception {
-                return GenerateDMToken( GenerateDMTokenRequest);
-            }
-        },"GenerateDMToken");
+        return executeAsync(
+        		GenerateDMTokenRequest
+//        		new Functions.IFunc< GenerateDMTokenResponseType>() {
+//            public GenerateDMTokenResponseType Func() throws java.lang.Exception {
+//                return GenerateDMToken( GenerateDMTokenRequest);
+//            }
+//        }
+        		,"GenerateDMToken");
     }
-    
-    public String VerifyDMReceipt(final String VerifyDMReceiptRequest ) throws java.lang.Exception
+    //TODO: NOT available!!!
+/*    public String VerifyDMReceipt(final String VerifyDMReceiptRequest ) throws java.lang.Exception
     {
-/*This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account*/
+//This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account
         return null;    
     }
     
@@ -155,7 +159,7 @@ public class DelegatedManagementBinding
             }
         },"VerifyDMReceipt");
     }
-    protected java.lang.Object execute(IWcfMethod wcfMethod,String methodName) throws java.lang.Exception
+*/    protected java.lang.Object execute(IWcfMethod wcfMethod,String methodName) throws java.lang.Exception
     {
         org.ksoap2.transport.Transport __httpTransport=createTransport();
         __httpTransport.debug=enableLogging;
@@ -182,7 +186,7 @@ public class DelegatedManagementBinding
             return wcfMethod.ProcessResult(__envelope,__retObj);
         }
     }
-    protected < T> android.os.AsyncTask  executeAsync(final Functions.IFunc< T> func,final java.lang.String methodName)
+    protected < T> android.os.AsyncTask  executeAsync(final GenerateDMTokenRequestType GenerateDMTokenRequest,final java.lang.String methodName)
     {
         return new android.os.AsyncTask< Void, Void, OperationResult< T>>()
         {
@@ -196,6 +200,11 @@ public class DelegatedManagementBinding
                 result.MethodName=methodName;
                 try
                 {
+                	Functions.IFunc< T> func = (IFunc<T>) new Functions.IFunc< GenerateDMTokenResponseType>() {
+                        public GenerateDMTokenResponseType Func() throws java.lang.Exception {
+                            return GenerateDMToken( GenerateDMTokenRequest);
+                        }
+                    };
                     result.Result= func.Func();
                 }
                 catch(java.lang.Exception ex)

@@ -16,15 +16,16 @@ package org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.android;
 
 import java.util.List;
 
+
 import org.ksoap2.HeaderProperty;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.transport.HttpTransportSE;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.IServiceEvents;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.OperationResult;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.ExtendedSoapSerializationEnvelope;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions.IFunc;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.OperationResult;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.responses.GetCAInformationResponseType;
 
 
@@ -41,7 +42,7 @@ public class CAInfoCallBackBinding
 
     int timeOut=60000;
     public List< HeaderProperty> httpHeaders;
-    public boolean enableLogging;
+    public boolean enableLogging = true;
 
     IServiceEvents callback;
 //    public CAInfoCallBackBinding(){}
@@ -112,7 +113,7 @@ public class CAInfoCallBackBinding
         return null;
     }
     
-    public void AuditCAInformation(final GetCAInformationResponseType AuditCAInformationResponse ) throws java.lang.Exception
+    private void AuditCAInformation(final GetCAInformationResponseType AuditCAInformationResponse ) throws java.lang.Exception
     {
         execute(new IWcfMethod()
         {
@@ -128,19 +129,23 @@ public class CAInfoCallBackBinding
             public java.lang.Object ProcessResult(ExtendedSoapSerializationEnvelope __envelope,java.lang.Object __result)throws java.lang.Exception {
                 return null;
             }
-        },"");
+        },"AuditCAInformation");
     }
     
     public android.os.AsyncTask AuditCAInformationAsync(final GetCAInformationResponseType AuditCAInformationResponse)
     {
-        return executeAsync(new Functions.IFunc< Void>()
-        {
-            @Override
-            public Void Func() throws java.lang.Exception {
-                AuditCAInformation( AuditCAInformationResponse);
-                return null;
-            }
-        },"AuditCAInformation");
+        return executeAsync(
+        		AuditCAInformationResponse
+
+//        		new Functions.IFunc< Void>()
+//        {
+//            @Override
+//            public Void Func() throws java.lang.Exception {
+//                AuditCAInformation( AuditCAInformationResponse);
+//                return null;
+//            }
+//        }
+        		,"AuditCAInformation");
     }
     protected java.lang.Object execute(IWcfMethod wcfMethod,String methodName) throws java.lang.Exception
     {
@@ -169,7 +174,7 @@ public class CAInfoCallBackBinding
             return wcfMethod.ProcessResult(__envelope,__retObj);
         }
     }
-    protected < T> android.os.AsyncTask  executeAsync(final Functions.IFunc< T> func,final java.lang.String methodName)
+    protected < T> android.os.AsyncTask  executeAsync(final GetCAInformationResponseType AuditCAInformationResponse,final java.lang.String methodName)
     {
         return new android.os.AsyncTask< Void, Void, OperationResult< T>>()
         {
@@ -183,6 +188,14 @@ public class CAInfoCallBackBinding
                 result.MethodName=methodName;
                 try
                 {
+                	Functions.IFunc< T> func = (IFunc<T>) new Functions.IFunc< Void>()
+                    {
+                        @Override
+                        public Void Func() throws java.lang.Exception {
+                            AuditCAInformation( AuditCAInformationResponse);
+                            return null;
+                        }
+                    };
                     result.Result= func.Func();
                 }
                 catch(java.lang.Exception ex)

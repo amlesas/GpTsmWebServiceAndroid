@@ -18,6 +18,7 @@ import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Vector;
 
+
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.AttributeContainer;
 import org.ksoap2.serialization.MarshalFloat;
@@ -27,34 +28,34 @@ import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.kxml2.io.KXmlParser;
 import org.kxml2.kdom.Element;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.AID;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.Address;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.ApplicationData;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.ApplicationLog;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.CRN;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.CardAuditTrail;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.CardConfiguration;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.CardConfigurationLog;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.CardCustomization;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.CollatorReturnCode;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.Data;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.DataSet;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.DeliveryModule;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.Entity;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.EntityID;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.Entity_Contact;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.Error;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.GenericModule;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.Information;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.LogIdentifierCode;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.MarshalDate;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.MarshalGuid;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.ModuleIdentifierCode;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.Person;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.PhysicalCardIdentifier;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.ProcessingStep;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.ProcessingStepResult;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.RequestedDeliveryDate;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.AID;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.Address;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.ApplicationData;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.ApplicationLog;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.CRN;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.CardAuditTrail;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.CardConfiguration;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.CardConfigurationLog;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.CardCustomization;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.CollatorReturnCode;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.Data;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.DataSet;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.DeliveryModule;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.Entity;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.EntityID;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.Entity_Contact;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.Error;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.GenericModule;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.Information;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.LogIdentifierCode;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.MarshalDate;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.MarshalGuid;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.ModuleIdentifierCode;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.Person;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.PhysicalCardIdentifier;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.ProcessingStep;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.ProcessingStepResult;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.RequestedDeliveryDate;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.*;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.commands.ActivateServiceCommandType;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.commands.ApplicationRegistryUpdateCommandType;
@@ -432,7 +433,7 @@ public class ExtendedSoapSerializationEnvelope extends SoapSerializationEnvelope
     private static final String TYPE_LABEL = "type";
 
     public ExtendedSoapSerializationEnvelope() {
-        super(SoapEnvelope.VER11);
+        super(SoapEnvelope.VER12);
         implicitTypes = true;
 
         new MarshalGuid().register(this);
@@ -444,7 +445,7 @@ public class ExtendedSoapSerializationEnvelope extends SoapSerializationEnvelope
 
     @Override
     protected void writeProperty(XmlSerializer writer, java.lang.Object obj, PropertyInfo type) throws IOException {
-        //!!!!! If you have a compilation error here then you are using old version of ksoap2 library. Please upgrade to the latest version.
+        //!!!!! If you have a compilation error here then you are using org.mbds.wolf.tsm.gp.systems.messaging2_1_0 version of ksoap2 library. Please upgrade to the latest version.
         //!!!!! You can find a correct version in Lib folder from generated zip file!!!!!
         if (obj == null || obj== SoapPrimitive.NullNilElement) {
             writer.attribute(xsi, version >= VER12 ? NIL_LABEL : NULL_LABEL, "true");
@@ -469,7 +470,7 @@ public class ExtendedSoapSerializationEnvelope extends SoapSerializationEnvelope
                 }
                 //super.writeProperty(writer,obj,type);
 
-                //!!!!! If you have a compilation error here then you are using old version of ksoap2 library. Please upgrade to the latest version.
+                //!!!!! If you have a compilation error here then you are using org.mbds.wolf.tsm.gp.systems.messaging2_1_0 version of ksoap2 library. Please upgrade to the latest version.
                 //!!!!! You can find a correct version in Lib folder from generated zip file!!!!!
                 writeElement(writer, obj, type, qName[QNAME_MARSHAL]);
             }

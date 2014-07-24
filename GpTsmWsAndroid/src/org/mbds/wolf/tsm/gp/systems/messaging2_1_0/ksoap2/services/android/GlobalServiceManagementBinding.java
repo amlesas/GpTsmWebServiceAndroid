@@ -16,15 +16,16 @@ package org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.android;
 
 import java.util.List;
 
+
 import org.ksoap2.HeaderProperty;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.transport.HttpTransportSE;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.IServiceEvents;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.OperationResult;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.ExtendedSoapSerializationEnvelope;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions.IFunc;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.OperationResult;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.DeclareServiceInstanceReferenceRequestType;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.DeployServiceRequestType;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.GetServiceInstanceReferenceDescriptorRequestType;
@@ -49,7 +50,7 @@ public class GlobalServiceManagementBinding
 
     int timeOut=60000;
     public List< HeaderProperty> httpHeaders;
-    public boolean enableLogging;
+    public boolean enableLogging = true;
 
     IServiceEvents callback;
 //    public GlobalServiceManagementBinding(){}
@@ -120,7 +121,7 @@ public class GlobalServiceManagementBinding
         return null;
     }
     
-    public LookupServiceInstanceReferenceResponseType LookupServiceInstanceReference(final LookupServiceInstanceReferenceRequestType LookupServiceInstanceReferenceRequest ) throws java.lang.Exception
+    private LookupServiceInstanceReferenceResponseType LookupServiceInstanceReference(final LookupServiceInstanceReferenceRequestType LookupServiceInstanceReferenceRequest ) throws java.lang.Exception
     {
         return (LookupServiceInstanceReferenceResponseType)execute(new IWcfMethod()
         {
@@ -136,19 +137,22 @@ public class GlobalServiceManagementBinding
             public java.lang.Object ProcessResult(ExtendedSoapSerializationEnvelope __envelope,java.lang.Object __result)throws java.lang.Exception {
                 return (LookupServiceInstanceReferenceResponseType)getResult(LookupServiceInstanceReferenceResponseType.class,__result,"LookupServiceInstanceReferenceResponse",__envelope);
             }
-        },"");
+        },"LookupServiceInstanceReference");
     }
     
     public android.os.AsyncTask LookupServiceInstanceReferenceAsync(final LookupServiceInstanceReferenceRequestType LookupServiceInstanceReferenceRequest)
     {
-        return executeAsync(new Functions.IFunc< LookupServiceInstanceReferenceResponseType>() {
+        return executeAsync(
+        		//LookupServiceInstanceReferenceRequest
+        		new Functions.IFunc< LookupServiceInstanceReferenceResponseType>() {
             public LookupServiceInstanceReferenceResponseType Func() throws java.lang.Exception {
                 return LookupServiceInstanceReference( LookupServiceInstanceReferenceRequest);
             }
-        },"LookupServiceInstanceReference");
+        }
+        		,"LookupServiceInstanceReference");
     }
     
-    public DeclareServiceInstanceReferenceResponseType DeclareServiceInstanceReference(final DeclareServiceInstanceReferenceRequestType DeclareServiceInstanceReferenceRequest ) throws java.lang.Exception
+    private DeclareServiceInstanceReferenceResponseType DeclareServiceInstanceReference(final DeclareServiceInstanceReferenceRequestType DeclareServiceInstanceReferenceRequest ) throws java.lang.Exception
     {
         return (DeclareServiceInstanceReferenceResponseType)execute(new IWcfMethod()
         {
@@ -164,7 +168,7 @@ public class GlobalServiceManagementBinding
             public java.lang.Object ProcessResult(ExtendedSoapSerializationEnvelope __envelope,java.lang.Object __result)throws java.lang.Exception {
                 return (DeclareServiceInstanceReferenceResponseType)getResult(DeclareServiceInstanceReferenceResponseType.class,__result,"DeclareServiceInstanceReferenceResponse",__envelope);
             }
-        },"");
+        },"DeclareServiceInstanceReference");
     }
     
     public android.os.AsyncTask DeclareServiceInstanceReferenceAsync(final DeclareServiceInstanceReferenceRequestType DeclareServiceInstanceReferenceRequest)
@@ -176,7 +180,7 @@ public class GlobalServiceManagementBinding
         },"DeclareServiceInstanceReference");
     }
     
-    public GetServiceInstanceReferenceDescriptorResponseType GetServiceInstanceReferenceDescriptor(final GetServiceInstanceReferenceDescriptorRequestType GetServiceInstanceReferenceDescriptorRequest ) throws java.lang.Exception
+    private GetServiceInstanceReferenceDescriptorResponseType GetServiceInstanceReferenceDescriptor(final GetServiceInstanceReferenceDescriptorRequestType GetServiceInstanceReferenceDescriptorRequest ) throws java.lang.Exception
     {
         return (GetServiceInstanceReferenceDescriptorResponseType)execute(new IWcfMethod()
         {
@@ -192,7 +196,7 @@ public class GlobalServiceManagementBinding
             public java.lang.Object ProcessResult(ExtendedSoapSerializationEnvelope __envelope,java.lang.Object __result)throws java.lang.Exception {
                 return (GetServiceInstanceReferenceDescriptorResponseType)getResult(GetServiceInstanceReferenceDescriptorResponseType.class,__result,"GetServiceInstanceReferenceDescriptorResponse",__envelope);
             }
-        },"");
+        },"GetServiceInstanceReferenceDescriptor");
     }
     
     public android.os.AsyncTask GetServiceInstanceReferenceDescriptorAsync(final GetServiceInstanceReferenceDescriptorRequestType GetServiceInstanceReferenceDescriptorRequest)
@@ -204,7 +208,7 @@ public class GlobalServiceManagementBinding
         },"GetServiceInstanceReferenceDescriptor");
     }
     
-    public GetServiceStateResponseType GetServiceState(final GetServiceStateRequestType GetServiceStateRequest ) throws java.lang.Exception
+    private GetServiceStateResponseType GetServiceState(final GetServiceStateRequestType GetServiceStateRequest ) throws java.lang.Exception
     {
         return (GetServiceStateResponseType)execute(new IWcfMethod()
         {
@@ -220,7 +224,7 @@ public class GlobalServiceManagementBinding
             public java.lang.Object ProcessResult(ExtendedSoapSerializationEnvelope __envelope,java.lang.Object __result)throws java.lang.Exception {
                 return (GetServiceStateResponseType)getResult(GetServiceStateResponseType.class,__result,"GetServiceStateResponse",__envelope);
             }
-        },"");
+        },"GetServiceState");
     }
     
     public android.os.AsyncTask GetServiceStateAsync(final GetServiceStateRequestType GetServiceStateRequest)
@@ -232,7 +236,7 @@ public class GlobalServiceManagementBinding
         },"GetServiceState");
     }
     
-    public void DeployService(final DeployServiceRequestType DeployServiceRequest ) throws java.lang.Exception
+    private void DeployService(final DeployServiceRequestType DeployServiceRequest ) throws java.lang.Exception
     {
         execute(new IWcfMethod()
         {
@@ -248,7 +252,7 @@ public class GlobalServiceManagementBinding
             public java.lang.Object ProcessResult(ExtendedSoapSerializationEnvelope __envelope,java.lang.Object __result)throws java.lang.Exception {
                 return null;
             }
-        },"");
+        },"DeployService");
     }
     
     public android.os.AsyncTask DeployServiceAsync(final DeployServiceRequestType DeployServiceRequest)
@@ -262,27 +266,27 @@ public class GlobalServiceManagementBinding
             }
         },"DeployService");
     }
-    
-    public void UpgradeService(final String UpgradeServiceRequest ) throws java.lang.Exception
+  //TODO  
+//    public void UpgradeService(final String UpgradeServiceRequest ) throws java.lang.Exception
+//    {
+///*This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account*/
+//    }
+//    
+//    public android.os.AsyncTask UpgradeServiceAsync(final String UpgradeServiceRequest)
+//    {
+//        return executeAsync(new Functions.IFunc< Void>()
+//        {
+//            @Override
+//            public Void Func() throws java.lang.Exception {
+//                UpgradeService( UpgradeServiceRequest);
+//                return null;
+//            }
+//        },"UpgradeService");
+//    }
+    //TODO
+/*    public void ExchangeServiceData(final String ExchangeServiceDataRequest ) throws java.lang.Exception
     {
-/*This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account*/
-    }
-    
-    public android.os.AsyncTask UpgradeServiceAsync(final String UpgradeServiceRequest)
-    {
-        return executeAsync(new Functions.IFunc< Void>()
-        {
-            @Override
-            public Void Func() throws java.lang.Exception {
-                UpgradeService( UpgradeServiceRequest);
-                return null;
-            }
-        },"UpgradeService");
-    }
-    
-    public void ExchangeServiceData(final String ExchangeServiceDataRequest ) throws java.lang.Exception
-    {
-/*This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account*/
+//This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account
     }
     
     public android.os.AsyncTask ExchangeServiceDataAsync(final String ExchangeServiceDataRequest)
@@ -296,40 +300,41 @@ public class GlobalServiceManagementBinding
             }
         },"ExchangeServiceData");
     }
-    
-    public void SuspendOrResumeService(final String SuspendOrResumeServiceRequest ) throws java.lang.Exception
-    {
-/*This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account*/
-    }
-    
-    public android.os.AsyncTask SuspendOrResumeServiceAsync(final String SuspendOrResumeServiceRequest)
-    {
-        return executeAsync(new Functions.IFunc< Void>()
-        {
-            @Override
-            public Void Func() throws java.lang.Exception {
-                SuspendOrResumeService( SuspendOrResumeServiceRequest);
-                return null;
-            }
-        },"SuspendOrResumeService");
-    }
-    
-    public void TerminateService(final String TerminateServiceRequest ) throws java.lang.Exception
-    {
-/*This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account*/
-    }
-    
-    public android.os.AsyncTask TerminateServiceAsync(final String TerminateServiceRequest)
-    {
-        return executeAsync(new Functions.IFunc< Void>()
-        {
-            @Override
-            public Void Func() throws java.lang.Exception {
-                TerminateService( TerminateServiceRequest);
-                return null;
-            }
-        },"TerminateService");
-    }
+*/   
+    //TODO
+//    public void SuspendOrResumeService(final String SuspendOrResumeServiceRequest ) throws java.lang.Exception
+//    {
+///*This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account*/
+//    }
+//    
+//    public android.os.AsyncTask SuspendOrResumeServiceAsync(final String SuspendOrResumeServiceRequest)
+//    {
+//        return executeAsync(new Functions.IFunc< Void>()
+//        {
+//            @Override
+//            public Void Func() throws java.lang.Exception {
+//                SuspendOrResumeService( SuspendOrResumeServiceRequest);
+//                return null;
+//            }
+//        },"SuspendOrResumeService");
+//    }
+//    TODO:
+//    public void TerminateService(final String TerminateServiceRequest ) throws java.lang.Exception
+//    {
+///*This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account*/
+//    }
+//    
+//    public android.os.AsyncTask TerminateServiceAsync(final String TerminateServiceRequest)
+//    {
+//        return executeAsync(new Functions.IFunc< Void>()
+//        {
+//            @Override
+//            public Void Func() throws java.lang.Exception {
+//                TerminateService( TerminateServiceRequest);
+//                return null;
+//            }
+//        },"TerminateService");
+//    }
     protected java.lang.Object execute(IWcfMethod wcfMethod,String methodName) throws java.lang.Exception
     {
         org.ksoap2.transport.Transport __httpTransport=createTransport();

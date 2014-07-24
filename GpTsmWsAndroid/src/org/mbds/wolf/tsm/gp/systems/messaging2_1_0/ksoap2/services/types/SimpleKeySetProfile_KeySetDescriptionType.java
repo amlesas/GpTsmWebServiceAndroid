@@ -11,6 +11,8 @@ package org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types;
 
 
 import java.util.Hashtable;
+
+
 import org.ksoap2.serialization.*;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.ExtendedSoapSerializationEnvelope;
 
@@ -56,7 +58,7 @@ public class SimpleKeySetProfile_KeySetDescriptionType extends KeySetDescription
     @Override
     public java.lang.Object getProperty(int propertyIndex) {
         int count = super.getPropertyCount();
-        //!!!!! If you have a compilation error here then you are using old version of ksoap2 library. Please upgrade to the latest version.
+        //!!!!! If you have a compilation error here then you are using org.mbds.wolf.tsm.gp.systems.messaging2_1_0 version of ksoap2 library. Please upgrade to the latest version.
         //!!!!! You can find a correct version in Lib folder from generated zip file!!!!!
         if(propertyIndex==count+0)
         {

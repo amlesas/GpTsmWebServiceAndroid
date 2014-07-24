@@ -16,15 +16,16 @@ package org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.android;
 
 import java.util.List;
 
+
 import org.ksoap2.HeaderProperty;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.transport.HttpTransportSE;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.IServiceEvents;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.OperationResult;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.ExtendedSoapSerializationEnvelope;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions.IFunc;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.OperationResult;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.responses.BindDeviceApplicationToSEApplicationResponseType;
 
 
@@ -41,7 +42,7 @@ public class DeviceApplicationBindingCallBackBinding
 
     int timeOut=60000;
     public List< HeaderProperty> httpHeaders;
-    public boolean enableLogging;
+    public boolean enableLogging = true;
 
     IServiceEvents callback;
 //    public DeviceApplicationBindingCallBackBinding(){}
@@ -112,7 +113,7 @@ public class DeviceApplicationBindingCallBackBinding
         return null;
     }
     
-    public void BindDeviceApplicationToSEApplication(final BindDeviceApplicationToSEApplicationResponseType BindDeviceApplicationToSEApplicationResponse ) throws java.lang.Exception
+    private void BindDeviceApplicationToSEApplication(final BindDeviceApplicationToSEApplicationResponseType BindDeviceApplicationToSEApplicationResponse ) throws java.lang.Exception
     {
         execute(new IWcfMethod()
         {
@@ -128,24 +129,27 @@ public class DeviceApplicationBindingCallBackBinding
             public java.lang.Object ProcessResult(ExtendedSoapSerializationEnvelope __envelope,java.lang.Object __result)throws java.lang.Exception {
                 return null;
             }
-        },"");
+        },"BindDeviceApplicationToSEApplication");
     }
     
     public android.os.AsyncTask BindDeviceApplicationToSEApplicationAsync(final BindDeviceApplicationToSEApplicationResponseType BindDeviceApplicationToSEApplicationResponse)
     {
-        return executeAsync(new Functions.IFunc< Void>()
-        {
-            @Override
-            public Void Func() throws java.lang.Exception {
-                BindDeviceApplicationToSEApplication( BindDeviceApplicationToSEApplicationResponse);
-                return null;
-            }
-        },"BindDeviceApplicationToSEApplication");
+        return executeAsync(
+        		BindDeviceApplicationToSEApplicationResponse
+//        		new Functions.IFunc< Void>()
+//        {
+//            @Override
+//            public Void Func() throws java.lang.Exception {
+//                BindDeviceApplicationToSEApplication( BindDeviceApplicationToSEApplicationResponse);
+//                return null;
+//            }
+//        }
+        		,"BindDeviceApplicationToSEApplication");
     }
-    
-    public void UnbindDeviceApplicationToSEApplication(final String UnbindDeviceApplicationToSEApplicationResponse ) throws java.lang.Exception
+    //TODO
+/*    public void UnbindDeviceApplicationToSEApplication(final String UnbindDeviceApplicationToSEApplicationResponse ) throws java.lang.Exception
     {
-/*This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account*/
+//This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account
     }
     
     public android.os.AsyncTask UnbindDeviceApplicationToSEApplicationAsync(final String UnbindDeviceApplicationToSEApplicationResponse)
@@ -159,7 +163,7 @@ public class DeviceApplicationBindingCallBackBinding
             }
         },"UnbindDeviceApplicationToSEApplication");
     }
-    protected java.lang.Object execute(IWcfMethod wcfMethod,String methodName) throws java.lang.Exception
+*/    protected java.lang.Object execute(IWcfMethod wcfMethod,String methodName) throws java.lang.Exception
     {
         org.ksoap2.transport.Transport __httpTransport=createTransport();
         __httpTransport.debug=enableLogging;
@@ -186,7 +190,7 @@ public class DeviceApplicationBindingCallBackBinding
             return wcfMethod.ProcessResult(__envelope,__retObj);
         }
     }
-    protected < T> android.os.AsyncTask  executeAsync(final Functions.IFunc< T> func,final java.lang.String methodName)
+    protected < T> android.os.AsyncTask  executeAsync(final BindDeviceApplicationToSEApplicationResponseType BindDeviceApplicationToSEApplicationResponse,final java.lang.String methodName)
     {
         return new android.os.AsyncTask< Void, Void, OperationResult< T>>()
         {
@@ -200,6 +204,14 @@ public class DeviceApplicationBindingCallBackBinding
                 result.MethodName=methodName;
                 try
                 {
+                	Functions.IFunc< T> func = (IFunc<T>) new Functions.IFunc< Void>()
+                    {
+                        @Override
+                        public Void Func() throws java.lang.Exception {
+                            BindDeviceApplicationToSEApplication( BindDeviceApplicationToSEApplicationResponse);
+                            return null;
+                        }
+                    };
                     result.Result= func.Func();
                 }
                 catch(java.lang.Exception ex)

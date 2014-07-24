@@ -21,10 +21,10 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.transport.HttpTransportSE;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.IServiceEvents;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.OperationResult;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.ExtendedSoapSerializationEnvelope;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions.IFunc;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.OperationResult;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.responses.SECommandsGenerationAndRemoteExecutionResponseType;
 
 
@@ -41,7 +41,7 @@ public class CardContentManagementCallBackBinding
 
     int timeOut=60000;
     public List< HeaderProperty> httpHeaders;
-    public boolean enableLogging;
+    public boolean enableLogging = true;
 
     IServiceEvents callback;
 //    public CardContentManagementCallBackBinding(){}
@@ -112,7 +112,7 @@ public class CardContentManagementCallBackBinding
         return null;
     }
     
-    public void SECommandsGenerationAndRemoteExecution(final SECommandsGenerationAndRemoteExecutionResponseType SECommandsGenerationAndRemoteExecutionResponse ) throws java.lang.Exception
+    private void SECommandsGenerationAndRemoteExecution(final SECommandsGenerationAndRemoteExecutionResponseType SECommandsGenerationAndRemoteExecutionResponse ) throws java.lang.Exception
     {
         execute(new IWcfMethod()
         {
@@ -128,19 +128,22 @@ public class CardContentManagementCallBackBinding
             public java.lang.Object ProcessResult(ExtendedSoapSerializationEnvelope __envelope,java.lang.Object __result)throws java.lang.Exception {
                 return null;
             }
-        },"");
+        },"SECommandsGenerationAndRemoteExecution");
     }
     
     public android.os.AsyncTask SECommandsGenerationAndRemoteExecutionAsync(final SECommandsGenerationAndRemoteExecutionResponseType SECommandsGenerationAndRemoteExecutionResponse)
     {
-        return executeAsync(new Functions.IFunc< Void>()
-        {
-            @Override
-            public Void Func() throws java.lang.Exception {
-                SECommandsGenerationAndRemoteExecution( SECommandsGenerationAndRemoteExecutionResponse);
-                return null;
-            }
-        },"SECommandsGenerationAndRemoteExecution");
+        return executeAsync(
+        		SECommandsGenerationAndRemoteExecutionResponse
+//        		new Functions.IFunc< Void>()
+//        {
+//            @Override
+//            public Void Func() throws java.lang.Exception {
+//                SECommandsGenerationAndRemoteExecution( SECommandsGenerationAndRemoteExecutionResponse);
+//                return null;
+//            }
+//        }
+        		,"SECommandsGenerationAndRemoteExecution");
     }
     protected java.lang.Object execute(IWcfMethod wcfMethod,String methodName) throws java.lang.Exception
     {
@@ -169,7 +172,7 @@ public class CardContentManagementCallBackBinding
             return wcfMethod.ProcessResult(__envelope,__retObj);
         }
     }
-    protected < T> android.os.AsyncTask  executeAsync(final Functions.IFunc< T> func,final java.lang.String methodName)
+    protected < T> android.os.AsyncTask  executeAsync(final SECommandsGenerationAndRemoteExecutionResponseType SECommandsGenerationAndRemoteExecutionResponse,final java.lang.String methodName)
     {
         return new android.os.AsyncTask< Void, Void, OperationResult< T>>()
         {
@@ -183,6 +186,14 @@ public class CardContentManagementCallBackBinding
                 result.MethodName=methodName;
                 try
                 {
+                	Functions.IFunc< T> func = (IFunc<T>) new Functions.IFunc< Void>()
+                    {
+                        @Override
+                        public Void Func() throws java.lang.Exception {
+                            SECommandsGenerationAndRemoteExecution( SECommandsGenerationAndRemoteExecutionResponse);
+                            return null;
+                        }
+                    };
                     result.Result= func.Func();
                 }
                 catch(java.lang.Exception ex)

@@ -21,10 +21,10 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.transport.HttpTransportSE;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.IServiceEvents;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.OperationResult;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.ExtendedSoapSerializationEnvelope;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions.IFunc;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.OperationResult;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.EnrollSSDOwnerCertificateRequestType;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.responses.EnrollSSDOwnerCertificateResponseType;
 
@@ -42,7 +42,7 @@ public class CCCMCertificatesManagementBinding
 
     int timeOut=60000;
     public List< HeaderProperty> httpHeaders;
-    public boolean enableLogging;
+    public boolean enableLogging = true;
 
     IServiceEvents callback;
 //    public CCCMCertificatesManagementBinding(){}
@@ -113,7 +113,7 @@ public class CCCMCertificatesManagementBinding
         return null;
     }
     
-    public EnrollSSDOwnerCertificateResponseType EnrollSSDOwnerCertificate(final EnrollSSDOwnerCertificateRequestType EnrollSSDOwnerCertificateRequest ) throws java.lang.Exception
+    private EnrollSSDOwnerCertificateResponseType EnrollSSDOwnerCertificate(final EnrollSSDOwnerCertificateRequestType EnrollSSDOwnerCertificateRequest ) throws java.lang.Exception
     {
         return (EnrollSSDOwnerCertificateResponseType)execute(new IWcfMethod()
         {
@@ -129,16 +129,19 @@ public class CCCMCertificatesManagementBinding
             public java.lang.Object ProcessResult(ExtendedSoapSerializationEnvelope __envelope,java.lang.Object __result)throws java.lang.Exception {
                 return (EnrollSSDOwnerCertificateResponseType)getResult(EnrollSSDOwnerCertificateResponseType.class,__result,"EnrollSSDOwnerCertificateResponse",__envelope);
             }
-        },"");
+        },"EnrollSSDOwnerCertificate");
     }
     
     public android.os.AsyncTask EnrollSSDOwnerCertificateAsync(final EnrollSSDOwnerCertificateRequestType EnrollSSDOwnerCertificateRequest)
     {
-        return executeAsync(new Functions.IFunc< EnrollSSDOwnerCertificateResponseType>() {
-            public EnrollSSDOwnerCertificateResponseType Func() throws java.lang.Exception {
-                return EnrollSSDOwnerCertificate( EnrollSSDOwnerCertificateRequest);
-            }
-        },"EnrollSSDOwnerCertificate");
+        return executeAsync(
+        		EnrollSSDOwnerCertificateRequest
+//        		new Functions.IFunc< EnrollSSDOwnerCertificateResponseType>() {
+//            public EnrollSSDOwnerCertificateResponseType Func() throws java.lang.Exception {
+//                return EnrollSSDOwnerCertificate( EnrollSSDOwnerCertificateRequest);
+//            }
+//        }
+        		,"EnrollSSDOwnerCertificate");
     }
     protected java.lang.Object execute(IWcfMethod wcfMethod,String methodName) throws java.lang.Exception
     {
@@ -167,7 +170,7 @@ public class CCCMCertificatesManagementBinding
             return wcfMethod.ProcessResult(__envelope,__retObj);
         }
     }
-    protected < T> android.os.AsyncTask  executeAsync(final Functions.IFunc< T> func,final java.lang.String methodName)
+    protected < T> android.os.AsyncTask  executeAsync(final EnrollSSDOwnerCertificateRequestType EnrollSSDOwnerCertificateRequest,final java.lang.String methodName)
     {
         return new android.os.AsyncTask< Void, Void, OperationResult< T>>()
         {
@@ -181,7 +184,12 @@ public class CCCMCertificatesManagementBinding
                 result.MethodName=methodName;
                 try
                 {
-                    result.Result= func.Func();
+                	Functions.IFunc< T> func = (IFunc<T>) new Functions.IFunc< EnrollSSDOwnerCertificateResponseType>() {
+                        public EnrollSSDOwnerCertificateResponseType Func() throws java.lang.Exception {
+                            return EnrollSSDOwnerCertificate( EnrollSSDOwnerCertificateRequest);
+                        }
+                    };
+                   result.Result= func.Func();
                 }
                 catch(java.lang.Exception ex)
                 {

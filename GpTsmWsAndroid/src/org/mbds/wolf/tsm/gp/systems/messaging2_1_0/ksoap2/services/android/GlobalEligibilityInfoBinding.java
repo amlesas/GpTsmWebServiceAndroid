@@ -16,14 +16,16 @@ package org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.android;
 
 import java.util.List;
 
+
 import org.ksoap2.HeaderProperty;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.transport.HttpTransportSE;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.IServiceEvents;
-import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.elements.OperationResult;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.ExtendedSoapSerializationEnvelope;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions.IFunc;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.OperationResult;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.CheckGlobalEligibilityRequestType;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.responses.CheckGlobalEligibilityResponseType;
 
@@ -41,7 +43,7 @@ public class GlobalEligibilityInfoBinding
 
     int timeOut=60000;
     public List< HeaderProperty> httpHeaders;
-    public boolean enableLogging;
+    public boolean enableLogging = true;
 
     IServiceEvents callback;
 //    public GlobalEligibilityInfoBinding(){}
@@ -112,7 +114,7 @@ public class GlobalEligibilityInfoBinding
         return null;
     }
     
-    public CheckGlobalEligibilityResponseType CheckGlobalEligibility(final CheckGlobalEligibilityRequestType CheckGlobalEligibilityRequest ) throws java.lang.Exception
+    private CheckGlobalEligibilityResponseType CheckGlobalEligibility(final CheckGlobalEligibilityRequestType CheckGlobalEligibilityRequest ) throws java.lang.Exception
     {
         return (CheckGlobalEligibilityResponseType)execute(new CHIIWcfMethod()
         {
@@ -128,16 +130,19 @@ public class GlobalEligibilityInfoBinding
             public java.lang.Object ProcessResult(ExtendedSoapSerializationEnvelope __envelope,java.lang.Object __result)throws java.lang.Exception {
                 return (CheckGlobalEligibilityResponseType)getResult(CheckGlobalEligibilityResponseType.class,__result,"CheckGlobalEligibilityResponse",__envelope);
             }
-        },"");
+        },"CheckGlobalEligibility");
     }
     
     public android.os.AsyncTask CheckGlobalEligibilityAsync(final CheckGlobalEligibilityRequestType CheckGlobalEligibilityRequest)
     {
-        return executeAsync(new Functions.IFunc< CheckGlobalEligibilityResponseType>() {
-            public CheckGlobalEligibilityResponseType Func() throws java.lang.Exception {
-                return CheckGlobalEligibility( CheckGlobalEligibilityRequest);
-            }
-        },"CheckGlobalEligibility");
+        return executeAsync(
+        		CheckGlobalEligibilityRequest
+//        		new Functions.IFunc< CheckGlobalEligibilityResponseType>() {
+//            public CheckGlobalEligibilityResponseType Func() throws java.lang.Exception {
+//                return CheckGlobalEligibility( CheckGlobalEligibilityRequest);
+//            }
+//        }
+        		,"CheckGlobalEligibility");
     }
     protected java.lang.Object execute(CHIIWcfMethod wcfMethod,String methodName) throws java.lang.Exception
     {
@@ -166,7 +171,10 @@ public class GlobalEligibilityInfoBinding
             return wcfMethod.ProcessResult(__envelope,__retObj);
         }
     }
-    protected < T> android.os.AsyncTask  executeAsync(final Functions.IFunc< T> func,final java.lang.String methodName)
+    protected < T> android.os.AsyncTask  executeAsync(
+    		final CheckGlobalEligibilityRequestType CheckGlobalEligibilityRequest,
+ //   		final Functions.IFunc< T> func,
+    		final java.lang.String methodName)
     {
         return new android.os.AsyncTask< Void, Void, OperationResult< T>>()
         {
@@ -176,11 +184,17 @@ public class GlobalEligibilityInfoBinding
             };
             @Override
             protected OperationResult< T> doInBackground(Void... params) {
-                OperationResult< T> result = new OperationResult< T>();
-                result.MethodName=methodName;
-                try
+              OperationResult< T> result = new OperationResult< T>();
+              try
                 {
-                    result.Result= func.Func();
+                	IFunc<CheckGlobalEligibilityResponseType> func =  new Functions.IFunc< CheckGlobalEligibilityResponseType>() {
+                        public CheckGlobalEligibilityResponseType Func() throws java.lang.Exception {
+                            return CheckGlobalEligibility( CheckGlobalEligibilityRequest);
+                        }
+                    };
+
+                    result.MethodName=methodName;
+                    result.Result= (T) func.Func();
                 }
                 catch(java.lang.Exception ex)
                 {
