@@ -26,7 +26,11 @@ import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.ExtendedSoapSerializat
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions.IFunc;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.OperationResult;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.BasicRequestType;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.DeployServiceRequestType;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.GetServiceStateRequestType;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.HandleMobileSubscriptionIdentifierChangedNotificationRequestType;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.responses.GetServiceStateResponseType;
 
 
 public class MobileSubscriptionLifeCycleNotificationBinding
@@ -113,7 +117,7 @@ public class MobileSubscriptionLifeCycleNotificationBinding
         return null;
     }
     
-    public void HandleMobileSubscriptionIdentifierChangedNotification(final HandleMobileSubscriptionIdentifierChangedNotificationRequestType HandleMobileSubscriptionIdentifierChangedNotificationRequest ) throws java.lang.Exception
+    private void HandleMobileSubscriptionIdentifierChangedNotification(final HandleMobileSubscriptionIdentifierChangedNotificationRequestType HandleMobileSubscriptionIdentifierChangedNotificationRequest ) throws java.lang.Exception
     {
         execute(new IWcfMethod()
         {
@@ -129,37 +133,40 @@ public class MobileSubscriptionLifeCycleNotificationBinding
             public java.lang.Object ProcessResult(ExtendedSoapSerializationEnvelope __envelope,java.lang.Object __result)throws java.lang.Exception {
                 return null;
             }
-        },"");
+        },"HandleMobileSubscriptionIdentifierChangedNotification");
     }
     
     public android.os.AsyncTask HandleMobileSubscriptionIdentifierChangedNotificationAsync(final HandleMobileSubscriptionIdentifierChangedNotificationRequestType HandleMobileSubscriptionIdentifierChangedNotificationRequest)
     {
-        return executeAsync(new Functions.IFunc< Void>()
-        {
-            @Override
-            public Void Func() throws java.lang.Exception {
-                HandleMobileSubscriptionIdentifierChangedNotification( HandleMobileSubscriptionIdentifierChangedNotificationRequest);
-                return null;
-            }
-        },"HandleMobileSubscriptionIdentifierChangedNotification");
+        return executeAsync(
+        		HandleMobileSubscriptionIdentifierChangedNotificationRequest
+//        		new Functions.IFunc< Void>()
+//        {
+//            @Override
+//            public Void Func() throws java.lang.Exception {
+//                HandleMobileSubscriptionIdentifierChangedNotification( HandleMobileSubscriptionIdentifierChangedNotificationRequest);
+//                return null;
+//            }
+//        }
+        		,"HandleMobileSubscriptionIdentifierChangedNotification");
     }
-    
-    public void HandleMobileSubscriptionStatusChangeNotification(final String HandleMobileSubscriptionStatusChangeNotificationRequest ) throws java.lang.Exception
-    {
-/*This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account*/
-    }
-    
-    public android.os.AsyncTask HandleMobileSubscriptionStatusChangeNotificationAsync(final String HandleMobileSubscriptionStatusChangeNotificationRequest)
-    {
-        return executeAsync(new Functions.IFunc< Void>()
-        {
-            @Override
-            public Void Func() throws java.lang.Exception {
-                HandleMobileSubscriptionStatusChangeNotification( HandleMobileSubscriptionStatusChangeNotificationRequest);
-                return null;
-            }
-        },"HandleMobileSubscriptionStatusChangeNotification");
-    }
+    //TODO
+//    private void HandleMobileSubscriptionStatusChangeNotification(final String HandleMobileSubscriptionStatusChangeNotificationRequest ) throws java.lang.Exception
+//    {
+///*This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account*/
+//    }
+//    
+//    public android.os.AsyncTask HandleMobileSubscriptionStatusChangeNotificationAsync(final String HandleMobileSubscriptionStatusChangeNotificationRequest)
+//    {
+//        return executeAsync(new Functions.IFunc< Void>()
+//        {
+//            @Override
+//            public Void Func() throws java.lang.Exception {
+//                HandleMobileSubscriptionStatusChangeNotification( HandleMobileSubscriptionStatusChangeNotificationRequest);
+//                return null;
+//            }
+//        },"HandleMobileSubscriptionStatusChangeNotification");
+//    }
     protected java.lang.Object execute(IWcfMethod wcfMethod,String methodName) throws java.lang.Exception
     {
         org.ksoap2.transport.Transport __httpTransport=createTransport();
@@ -187,7 +194,7 @@ public class MobileSubscriptionLifeCycleNotificationBinding
             return wcfMethod.ProcessResult(__envelope,__retObj);
         }
     }
-    protected < T> android.os.AsyncTask  executeAsync(final Functions.IFunc< T> func,final java.lang.String methodName)
+    protected < T> android.os.AsyncTask  executeAsync(final BasicRequestType request,final java.lang.String methodName)
     {
         return new android.os.AsyncTask< Void, Void, OperationResult< T>>()
         {
@@ -201,7 +208,21 @@ public class MobileSubscriptionLifeCycleNotificationBinding
                 result.MethodName=methodName;
                 try
                 {
-                    result.Result= func.Func();
+                	Functions.IFunc< T> func = null;
+                	if (request instanceof HandleMobileSubscriptionIdentifierChangedNotificationRequestType) {
+                		func = (IFunc<T>)new Functions.IFunc< Void>()
+                		        {
+                            @Override
+                            public Void Func() throws java.lang.Exception {
+                                HandleMobileSubscriptionIdentifierChangedNotification( (HandleMobileSubscriptionIdentifierChangedNotificationRequestType) request);
+                                return null;
+                            }
+                        };
+                	}
+                	if (func!=null)
+                		result.Result= func.Func();
+                	else
+                		throw new NullPointerException();
                 }
                 catch(java.lang.Exception ex)
                 {

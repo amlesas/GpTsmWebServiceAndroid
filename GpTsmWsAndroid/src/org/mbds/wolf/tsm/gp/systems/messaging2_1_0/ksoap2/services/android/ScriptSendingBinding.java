@@ -11,11 +11,7 @@ package org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.android;
 //
 //---------------------------------------------------
 
-
-
-
 import java.util.List;
-
 
 import org.ksoap2.HeaderProperty;
 import org.ksoap2.serialization.SoapObject;
@@ -26,6 +22,7 @@ import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.ExtendedSoapSerializat
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions.IFunc;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.OperationResult;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.BasicRequestType;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.BeginConversationRequestType;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.SendScriptRequestType;
 
@@ -114,7 +111,7 @@ public class ScriptSendingBinding
         return null;
     }
     
-    public void BeginConversation(final BeginConversationRequestType BeginConversationRequest ) throws java.lang.Exception
+    private void BeginConversation(final BeginConversationRequestType BeginConversationRequest ) throws java.lang.Exception
     {
         execute(new IWcfMethod()
         {
@@ -130,22 +127,25 @@ public class ScriptSendingBinding
             public java.lang.Object ProcessResult(ExtendedSoapSerializationEnvelope __envelope,java.lang.Object __result)throws java.lang.Exception {
                 return null;
             }
-        },"");
+        },"BeginConversation");
     }
     
     public android.os.AsyncTask BeginConversationAsync(final BeginConversationRequestType BeginConversationRequest)
     {
-        return executeAsync(new Functions.IFunc< Void>()
-        {
-            @Override
-            public Void Func() throws java.lang.Exception {
-                BeginConversation( BeginConversationRequest);
-                return null;
-            }
-        },"BeginConversation");
+        return executeAsync(
+        		BeginConversationRequest
+//        		new Functions.IFunc< Void>()
+//        {
+//            @Override
+//            public Void Func() throws java.lang.Exception {
+//                BeginConversation( BeginConversationRequest);
+//                return null;
+//            }
+//        }
+        		,"BeginConversation");
     }
     
-    public void SendScript(final SendScriptRequestType SendScriptRequest ) throws java.lang.Exception
+    private void SendScript(final SendScriptRequestType SendScriptRequest ) throws java.lang.Exception
     {
         execute(new IWcfMethod()
         {
@@ -161,35 +161,38 @@ public class ScriptSendingBinding
             public java.lang.Object ProcessResult(ExtendedSoapSerializationEnvelope __envelope,java.lang.Object __result)throws java.lang.Exception {
                 return null;
             }
-        },"");
+        },"SendScript");
     }
     
     public android.os.AsyncTask SendScriptAsync(final SendScriptRequestType SendScriptRequest)
     {
-        return executeAsync(new Functions.IFunc< Void>()
-        {
-            @Override
-            public Void Func() throws java.lang.Exception {
-                SendScript( SendScriptRequest);
-                return null;
-            }
-        },"SendScript");
+        return executeAsync(
+        		SendScriptRequest
+//        		new Functions.IFunc< Void>()
+//        {
+//            @Override
+//            public Void Func() throws java.lang.Exception {
+//                SendScript( SendScriptRequest);
+//                return null;
+//            }
+//        }
+        		,"SendScript");
     }
-    
-    public String EndConversation(final String EndConversationRequest ) throws java.lang.Exception
-    {
-/*This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account*/
-        return null;    
-    }
-    
-    public android.os.AsyncTask EndConversationAsync(final String EndConversationRequest)
-    {
-        return executeAsync(new Functions.IFunc< String>() {
-            public String Func() throws java.lang.Exception {
-                return EndConversation( EndConversationRequest);
-            }
-        },"EndConversation");
-    }
+    //TODO
+//    private String EndConversation(final String EndConversationRequest ) throws java.lang.Exception
+//    {
+///*This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account*/
+//        return null;    
+//    }
+//    
+//    public android.os.AsyncTask EndConversationAsync(final String EndConversationRequest)
+//    {
+//        return executeAsync(new Functions.IFunc< String>() {
+//            public String Func() throws java.lang.Exception {
+//                return EndConversation( EndConversationRequest);
+//            }
+//        },"EndConversation");
+//    }
     protected java.lang.Object execute(IWcfMethod wcfMethod,String methodName) throws java.lang.Exception
     {
         org.ksoap2.transport.Transport __httpTransport=createTransport();
@@ -217,7 +220,7 @@ public class ScriptSendingBinding
             return wcfMethod.ProcessResult(__envelope,__retObj);
         }
     }
-    protected < T> android.os.AsyncTask  executeAsync(final Functions.IFunc< T> func,final java.lang.String methodName)
+    protected < T> android.os.AsyncTask  executeAsync(final BasicRequestType request,final java.lang.String methodName)
     {
         return new android.os.AsyncTask< Void, Void, OperationResult< T>>()
         {
@@ -231,7 +234,30 @@ public class ScriptSendingBinding
                 result.MethodName=methodName;
                 try
                 {
-                    result.Result= func.Func();
+                	Functions.IFunc< T> func = null;
+                	if (request instanceof BeginConversationRequestType) {
+                		func = (IFunc<T>) new Functions.IFunc< Void>()
+	                    {
+	                        @Override
+	                        public Void Func() throws java.lang.Exception {
+	                            BeginConversation( (BeginConversationRequestType) request);
+	                            return null;
+	                        }
+	                    };
+	                } else if (request instanceof SendScriptRequestType) {
+	                	func = (IFunc<T>)new Functions.IFunc< Void>()
+	                    {
+	                        @Override
+	                        public Void Func() throws java.lang.Exception {
+	                            SendScript( (SendScriptRequestType) request);
+	                            return null;
+	                        }
+	                    };
+	                }
+                	if (func!=null)
+                		result.Result= func.Func();
+                	else
+                		throw new NullPointerException();
                 }
                 catch(java.lang.Exception ex)
                 {

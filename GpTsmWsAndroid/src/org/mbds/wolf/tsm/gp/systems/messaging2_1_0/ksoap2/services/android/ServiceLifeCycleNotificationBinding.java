@@ -11,11 +11,7 @@ package org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.android;
 //
 //---------------------------------------------------
 
-
-
-
 import java.util.List;
-
 
 import org.ksoap2.HeaderProperty;
 import org.ksoap2.serialization.SoapObject;
@@ -24,7 +20,9 @@ import org.ksoap2.transport.HttpTransportSE;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.IServiceEvents;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.ExtendedSoapSerializationEnvelope;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions.IFunc;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.OperationResult;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.BasicRequestType;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.HandleStartServiceStateChangeNotificationRequestType;
 
 
@@ -112,7 +110,7 @@ public class ServiceLifeCycleNotificationBinding
         return null;
     }
     
-    public void HandleStartServiceStateChangeNotification(final HandleStartServiceStateChangeNotificationRequestType HandleStartServiceStateChangeNotificationRequest ) throws java.lang.Exception
+    private void HandleStartServiceStateChangeNotification(final HandleStartServiceStateChangeNotificationRequestType HandleStartServiceStateChangeNotificationRequest ) throws java.lang.Exception
     {
         execute(new IWcfMethod()
         {
@@ -133,32 +131,35 @@ public class ServiceLifeCycleNotificationBinding
     
     public android.os.AsyncTask HandleStartServiceStateChangeNotificationAsync(final HandleStartServiceStateChangeNotificationRequestType HandleStartServiceStateChangeNotificationRequest)
     {
-        return executeAsync(new Functions.IFunc< Void>()
-        {
-            @Override
-            public Void Func() throws java.lang.Exception {
-                HandleStartServiceStateChangeNotification( HandleStartServiceStateChangeNotificationRequest);
-                return null;
-            }
-        },"HandleStartServiceStateChangeNotification");
+        return executeAsync(
+        		HandleStartServiceStateChangeNotificationRequest
+//        	new Functions.IFunc< Void>()
+//        {
+//            @Override
+//            public Void Func() throws java.lang.Exception {
+//                HandleStartServiceStateChangeNotification( HandleStartServiceStateChangeNotificationRequest);
+//                return null;
+//            }
+//        }
+        		,"HandleStartServiceStateChangeNotification");
     }
-    
-    public void HandleEndServiceStateChangeNotification(final String HandleEndServiceStateChangeNotificationRequest ) throws java.lang.Exception
-    {
-/*This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account*/
-    }
-    
-    public android.os.AsyncTask HandleEndServiceStateChangeNotificationAsync(final String HandleEndServiceStateChangeNotificationRequest)
-    {
-        return executeAsync(new Functions.IFunc< Void>()
-        {
-            @Override
-            public Void Func() throws java.lang.Exception {
-                HandleEndServiceStateChangeNotification( HandleEndServiceStateChangeNotificationRequest);
-                return null;
-            }
-        },"HandleEndServiceStateChangeNotification");
-    }
+    //TODO
+//    private void HandleEndServiceStateChangeNotification(final String HandleEndServiceStateChangeNotificationRequest ) throws java.lang.Exception
+//    {
+///*This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account*/
+//    }
+//    
+//    public android.os.AsyncTask HandleEndServiceStateChangeNotificationAsync(final String HandleEndServiceStateChangeNotificationRequest)
+//    {
+//        return executeAsync(new Functions.IFunc< Void>()
+//        {
+//            @Override
+//            public Void Func() throws java.lang.Exception {
+//                HandleEndServiceStateChangeNotification( HandleEndServiceStateChangeNotificationRequest);
+//                return null;
+//            }
+//        },"HandleEndServiceStateChangeNotification");
+//    }
     protected java.lang.Object execute(IWcfMethod wcfMethod,String methodName) throws java.lang.Exception
     {
         org.ksoap2.transport.Transport __httpTransport=createTransport();
@@ -186,7 +187,7 @@ public class ServiceLifeCycleNotificationBinding
             return wcfMethod.ProcessResult(__envelope,__retObj);
         }
     }
-    protected < T> android.os.AsyncTask  executeAsync(final Functions.IFunc< T> func,final java.lang.String methodName)
+    protected < T> android.os.AsyncTask  executeAsync(final BasicRequestType req,final java.lang.String methodName)
     {
         return new android.os.AsyncTask< Void, Void, OperationResult< T>>()
         {
@@ -200,7 +201,21 @@ public class ServiceLifeCycleNotificationBinding
                 result.MethodName=methodName;
                 try
                 {
-                    result.Result= func.Func();
+                	Functions.IFunc<T> func = null;
+					if (req instanceof HandleStartServiceStateChangeNotificationRequestType) {
+						func = (IFunc<T>)new Functions.IFunc< Void>()
+	                    {
+	                        @Override
+	                        public Void Func() throws java.lang.Exception {
+	                            HandleStartServiceStateChangeNotification( (HandleStartServiceStateChangeNotificationRequestType) req);
+	                            return null;
+	                        }
+	                    };
+					}
+					if (func != null)
+						result.Result = func.Func();
+					else
+						throw new NullPointerException();
                 }
                 catch(java.lang.Exception ex)
                 {

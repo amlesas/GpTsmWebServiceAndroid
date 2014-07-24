@@ -26,8 +26,13 @@ import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.ExtendedSoapSerializat
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions.IFunc;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.OperationResult;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.BasicRequestType;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.DeployServiceRequestType;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.GetServiceStateRequestType;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.responses.BasicResponseType;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.responses.DeployServiceResponseType;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.responses.ExchangeServiceDataResponseType;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.responses.GetServiceStateResponseType;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.responses.UpgradeServiceResponseType;
 
 
@@ -115,7 +120,7 @@ public class GlobalServiceManagementCallBackBinding
         return null;
     }
     
-    public void DeployService(final DeployServiceResponseType DeployServiceResponse ) throws java.lang.Exception
+    private void DeployService(final DeployServiceResponseType DeployServiceResponse ) throws java.lang.Exception
     {
         execute(new IWcfMethod()
         {
@@ -131,19 +136,22 @@ public class GlobalServiceManagementCallBackBinding
             public java.lang.Object ProcessResult(ExtendedSoapSerializationEnvelope __envelope,java.lang.Object __result)throws java.lang.Exception {
                 return null;
             }
-        },"");
+        },"DeployService");
     }
     
     public android.os.AsyncTask DeployServiceAsync(final DeployServiceResponseType DeployServiceResponse)
     {
-        return executeAsync(new Functions.IFunc< Void>()
-        {
-            @Override
-            public Void Func() throws java.lang.Exception {
-                DeployService( DeployServiceResponse);
-                return null;
-            }
-        },"DeployService");
+        return executeAsync(
+        		DeployServiceResponse
+//        		new Functions.IFunc< Void>()
+//        {
+//            @Override
+//            public Void Func() throws java.lang.Exception {
+//                DeployService( DeployServiceResponse);
+//                return null;
+//            }
+//        }
+        		,"DeployService");
     }
     
     public void UpgradeService(final UpgradeServiceResponseType UpgradeServiceResponse ) throws java.lang.Exception
@@ -162,22 +170,25 @@ public class GlobalServiceManagementCallBackBinding
             public java.lang.Object ProcessResult(ExtendedSoapSerializationEnvelope __envelope,java.lang.Object __result)throws java.lang.Exception {
                 return null;
             }
-        },"");
+        },"UpgradeService");
     }
     
     public android.os.AsyncTask UpgradeServiceAsync(final UpgradeServiceResponseType UpgradeServiceResponse)
     {
-        return executeAsync(new Functions.IFunc< Void>()
-        {
-            @Override
-            public Void Func() throws java.lang.Exception {
-                UpgradeService( UpgradeServiceResponse);
-                return null;
-            }
-        },"UpgradeService");
+        return executeAsync(
+        		UpgradeServiceResponse
+//        		new Functions.IFunc< Void>()
+//        {
+//            @Override
+//            public Void Func() throws java.lang.Exception {
+//                UpgradeService( UpgradeServiceResponse);
+//                return null;
+//            }
+//        }
+        		,"UpgradeService");
     }
     
-    public void ExchangeServiceData(final ExchangeServiceDataResponseType ExchangeServiceDataResponse ) throws java.lang.Exception
+    private void ExchangeServiceData(final ExchangeServiceDataResponseType ExchangeServiceDataResponse ) throws java.lang.Exception
     {
         execute(new IWcfMethod()
         {
@@ -193,54 +204,57 @@ public class GlobalServiceManagementCallBackBinding
             public java.lang.Object ProcessResult(ExtendedSoapSerializationEnvelope __envelope,java.lang.Object __result)throws java.lang.Exception {
                 return null;
             }
-        },"");
+        },"ExchangeServiceData");
     }
     
     public android.os.AsyncTask ExchangeServiceDataAsync(final ExchangeServiceDataResponseType ExchangeServiceDataResponse)
     {
-        return executeAsync(new Functions.IFunc< Void>()
-        {
-            @Override
-            public Void Func() throws java.lang.Exception {
-                ExchangeServiceData( ExchangeServiceDataResponse);
-                return null;
-            }
-        },"ExchangeServiceData");
+        return executeAsync(
+        		ExchangeServiceDataResponse
+//        		new Functions.IFunc< Void>()
+//        {
+//            @Override
+//            public Void Func() throws java.lang.Exception {
+//                ExchangeServiceData( ExchangeServiceDataResponse);
+//                return null;
+//            }
+//        }
+        		,"ExchangeServiceData");
     }
-    
-    public void SuspendOrResumeService(final String SuspendOrResumeServiceResponse ) throws java.lang.Exception
-    {
-/*This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account*/
-    }
-    
-    public android.os.AsyncTask SuspendOrResumeServiceAsync(final String SuspendOrResumeServiceResponse)
-    {
-        return executeAsync(new Functions.IFunc< Void>()
-        {
-            @Override
-            public Void Func() throws java.lang.Exception {
-                SuspendOrResumeService( SuspendOrResumeServiceResponse);
-                return null;
-            }
-        },"SuspendOrResumeService");
-    }
-    
-    public void TerminateService(final String TerminateServiceResponse ) throws java.lang.Exception
-    {
-/*This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account*/
-    }
-    
-    public android.os.AsyncTask TerminateServiceAsync(final String TerminateServiceResponse)
-    {
-        return executeAsync(new Functions.IFunc< Void>()
-        {
-            @Override
-            public Void Func() throws java.lang.Exception {
-                TerminateService( TerminateServiceResponse);
-                return null;
-            }
-        },"TerminateService");
-    }
+    //TODO
+//    private void SuspendOrResumeService(final String SuspendOrResumeServiceResponse ) throws java.lang.Exception
+//    {
+///*This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account*/
+//    }
+//    
+//    public android.os.AsyncTask SuspendOrResumeServiceAsync(final String SuspendOrResumeServiceResponse)
+//    {
+//        return executeAsync(new Functions.IFunc< Void>()
+//        {
+//            @Override
+//            public Void Func() throws java.lang.Exception {
+//                SuspendOrResumeService( SuspendOrResumeServiceResponse);
+//                return null;
+//            }
+//        },"SuspendOrResumeService");
+//    }
+//    
+//    public void TerminateService(final String TerminateServiceResponse ) throws java.lang.Exception
+//    {
+///*This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account*/
+//    }
+//    
+//    public android.os.AsyncTask TerminateServiceAsync(final String TerminateServiceResponse)
+//    {
+//        return executeAsync(new Functions.IFunc< Void>()
+//        {
+//            @Override
+//            public Void Func() throws java.lang.Exception {
+//                TerminateService( TerminateServiceResponse);
+//                return null;
+//            }
+//        },"TerminateService");
+//    }
     protected java.lang.Object execute(IWcfMethod wcfMethod,String methodName) throws java.lang.Exception
     {
         org.ksoap2.transport.Transport __httpTransport=createTransport();
@@ -268,7 +282,7 @@ public class GlobalServiceManagementCallBackBinding
             return wcfMethod.ProcessResult(__envelope,__retObj);
         }
     }
-    protected < T> android.os.AsyncTask  executeAsync(final Functions.IFunc< T> func,final java.lang.String methodName)
+    protected < T> android.os.AsyncTask  executeAsync(final BasicResponseType request,final java.lang.String methodName)
     {
         return new android.os.AsyncTask< Void, Void, OperationResult< T>>()
         {
@@ -282,7 +296,40 @@ public class GlobalServiceManagementCallBackBinding
                 result.MethodName=methodName;
                 try
                 {
-                    result.Result= func.Func();
+                	Functions.IFunc< T> func = null;
+                	if (request instanceof DeployServiceResponseType) {
+                		func = (IFunc<T>)new Functions.IFunc< Void>()
+                		        {
+                            @Override
+                            public Void Func() throws java.lang.Exception {
+                                DeployService( (DeployServiceResponseType) request);
+                                return null;
+                            }
+                        };
+                	} else if (request instanceof UpgradeServiceResponseType) {
+                		func = (IFunc<T>)         		new Functions.IFunc< Void>()
+                		        {
+                            @Override
+                            public Void Func() throws java.lang.Exception {
+                                UpgradeService( (UpgradeServiceResponseType) request);
+                                return null;
+                            }
+                        };
+
+                	} else if (request instanceof ExchangeServiceDataResponseType) {
+                		func = (IFunc<T>)new Functions.IFunc< Void>()
+                      {
+                          @Override
+                          public Void Func() throws java.lang.Exception {
+                              ExchangeServiceData( (ExchangeServiceDataResponseType) request);
+                              return null;
+                          }
+                      };
+                	}
+                	if (func!=null)
+                		result.Result= func.Func();
+                	else
+                		throw new NullPointerException();
                 }
                 catch(java.lang.Exception ex)
                 {

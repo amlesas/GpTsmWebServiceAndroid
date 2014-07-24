@@ -11,11 +11,7 @@ package org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.android;
 //
 //---------------------------------------------------
 
-
-
-
 import java.util.List;
-
 
 import org.ksoap2.HeaderProperty;
 import org.ksoap2.serialization.SoapObject;
@@ -26,6 +22,8 @@ import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.ExtendedSoapSerializat
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions.IFunc;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.OperationResult;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.BasicRequestType;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.BeginConversationRequestType;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.LoadSCWSServicePortalRequestType;
 
 
@@ -113,7 +111,7 @@ public class SCWSManagementBinding
         return null;
     }
     
-    public void LoadSCWSServicePortal(final LoadSCWSServicePortalRequestType LoadSCWSServicePortalRequest ) throws java.lang.Exception
+    private void LoadSCWSServicePortal(final LoadSCWSServicePortalRequestType LoadSCWSServicePortalRequest ) throws java.lang.Exception
     {
         execute(new IWcfMethod()
         {
@@ -129,37 +127,40 @@ public class SCWSManagementBinding
             public java.lang.Object ProcessResult(ExtendedSoapSerializationEnvelope __envelope,java.lang.Object __result)throws java.lang.Exception {
                 return null;
             }
-        },"");
+        },"LoadSCWSServicePortal");
     }
     
     public android.os.AsyncTask LoadSCWSServicePortalAsync(final LoadSCWSServicePortalRequestType LoadSCWSServicePortalRequest)
     {
-        return executeAsync(new Functions.IFunc< Void>()
-        {
-            @Override
-            public Void Func() throws java.lang.Exception {
-                LoadSCWSServicePortal( LoadSCWSServicePortalRequest);
-                return null;
-            }
-        },"LoadSCWSServicePortal");
+        return executeAsync(
+        		LoadSCWSServicePortalRequest
+//        		new Functions.IFunc< Void>()
+//        {
+//            @Override
+//            public Void Func() throws java.lang.Exception {
+//                LoadSCWSServicePortal( LoadSCWSServicePortalRequest);
+//                return null;
+//            }
+//        }
+        		,"LoadSCWSServicePortal");
     }
-    
-    public void DeleteSCWSServicePortal(final String DeleteSCWSServicePortalRequest ) throws java.lang.Exception
-    {
-/*This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account*/
-    }
-    
-    public android.os.AsyncTask DeleteSCWSServicePortalAsync(final String DeleteSCWSServicePortalRequest)
-    {
-        return executeAsync(new Functions.IFunc< Void>()
-        {
-            @Override
-            public Void Func() throws java.lang.Exception {
-                DeleteSCWSServicePortal( DeleteSCWSServicePortalRequest);
-                return null;
-            }
-        },"DeleteSCWSServicePortal");
-    }
+    //TODO
+//    private void DeleteSCWSServicePortal(final String DeleteSCWSServicePortalRequest ) throws java.lang.Exception
+//    {
+///*This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account*/
+//    }
+//    
+//    public android.os.AsyncTask DeleteSCWSServicePortalAsync(final String DeleteSCWSServicePortalRequest)
+//    {
+//        return executeAsync(new Functions.IFunc< Void>()
+//        {
+//            @Override
+//            public Void Func() throws java.lang.Exception {
+//                DeleteSCWSServicePortal( DeleteSCWSServicePortalRequest);
+//                return null;
+//            }
+//        },"DeleteSCWSServicePortal");
+//    }
     protected java.lang.Object execute(IWcfMethod wcfMethod,String methodName) throws java.lang.Exception
     {
         org.ksoap2.transport.Transport __httpTransport=createTransport();
@@ -187,7 +188,7 @@ public class SCWSManagementBinding
             return wcfMethod.ProcessResult(__envelope,__retObj);
         }
     }
-    protected < T> android.os.AsyncTask  executeAsync(final Functions.IFunc< T> func,final java.lang.String methodName)
+    protected < T> android.os.AsyncTask  executeAsync(final BasicRequestType request,final java.lang.String methodName)
     {
         return new android.os.AsyncTask< Void, Void, OperationResult< T>>()
         {
@@ -201,8 +202,21 @@ public class SCWSManagementBinding
                 result.MethodName=methodName;
                 try
                 {
-                    result.Result= func.Func();
-                }
+                	Functions.IFunc< T> func = null;
+                	if (request instanceof BeginConversationRequestType) {
+                		func = (IFunc<T>) new Functions.IFunc< Void>()
+                        {
+                            @Override
+                            public Void Func() throws java.lang.Exception {
+                                LoadSCWSServicePortal( (LoadSCWSServicePortalRequestType) request);
+                                return null;
+                            }
+                             };
+	                }
+                	if (func!=null)
+                		result.Result= func.Func();
+                	else
+                		throw new NullPointerException();                }
                 catch(java.lang.Exception ex)
                 {
                     ex.printStackTrace();

@@ -145,7 +145,7 @@ public class DelegatedManagementBinding
         		,"GenerateDMToken");
     }
     //TODO: NOT available!!!
-/*    public String VerifyDMReceipt(final String VerifyDMReceiptRequest ) throws java.lang.Exception
+/*    private String VerifyDMReceipt(final String VerifyDMReceiptRequest ) throws java.lang.Exception
     {
 //This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account
         return null;    

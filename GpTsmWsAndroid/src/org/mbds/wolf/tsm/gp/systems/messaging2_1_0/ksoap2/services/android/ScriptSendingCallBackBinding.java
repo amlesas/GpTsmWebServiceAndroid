@@ -16,7 +16,6 @@ package org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.android;
 
 import java.util.List;
 
-
 import org.ksoap2.HeaderProperty;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
@@ -26,6 +25,7 @@ import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.ExtendedSoapSerializat
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions.IFunc;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.OperationResult;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.responses.BasicResponseType;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.responses.BeginConversationResponseType;
 
 
@@ -113,7 +113,7 @@ public class ScriptSendingCallBackBinding
         return null;
     }
     
-    public void BeginConversation(final BeginConversationResponseType BeginConversationResponse ) throws java.lang.Exception
+    private void BeginConversation(final BeginConversationResponseType BeginConversationResponse ) throws java.lang.Exception
     {
         execute(new IWcfMethod()
         {
@@ -129,37 +129,40 @@ public class ScriptSendingCallBackBinding
             public java.lang.Object ProcessResult(ExtendedSoapSerializationEnvelope __envelope,java.lang.Object __result)throws java.lang.Exception {
                 return null;
             }
-        },"");
+        },"BeginConversation");
     }
     
     public android.os.AsyncTask BeginConversationAsync(final BeginConversationResponseType BeginConversationResponse)
     {
-        return executeAsync(new Functions.IFunc< Void>()
-        {
-            @Override
-            public Void Func() throws java.lang.Exception {
-                BeginConversation( BeginConversationResponse);
-                return null;
-            }
-        },"BeginConversation");
+        return executeAsync(
+        		BeginConversationResponse
+//        		new Functions.IFunc< Void>()
+//        {
+//            @Override
+//            public Void Func() throws java.lang.Exception {
+//                BeginConversation( BeginConversationResponse);
+//                return null;
+//            }
+//        }
+        		,"BeginConversation");
     }
-    
-    public void SendScript(final String SendScriptResponse ) throws java.lang.Exception
-    {
-/*This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account*/
-    }
-    
-    public android.os.AsyncTask SendScriptAsync(final String SendScriptResponse)
-    {
-        return executeAsync(new Functions.IFunc< Void>()
-        {
-            @Override
-            public Void Func() throws java.lang.Exception {
-                SendScript( SendScriptResponse);
-                return null;
-            }
-        },"SendScript");
-    }
+    //TODO
+//    private void SendScript(final String SendScriptResponse ) throws java.lang.Exception
+//    {
+///*This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account*/
+//    }
+//    
+//    public android.os.AsyncTask SendScriptAsync(final String SendScriptResponse)
+//    {
+//        return executeAsync(new Functions.IFunc< Void>()
+//        {
+//            @Override
+//            public Void Func() throws java.lang.Exception {
+//                SendScript( SendScriptResponse);
+//                return null;
+//            }
+//        },"SendScript");
+//    }
     protected java.lang.Object execute(IWcfMethod wcfMethod,String methodName) throws java.lang.Exception
     {
         org.ksoap2.transport.Transport __httpTransport=createTransport();
@@ -187,7 +190,7 @@ public class ScriptSendingCallBackBinding
             return wcfMethod.ProcessResult(__envelope,__retObj);
         }
     }
-    protected < T> android.os.AsyncTask  executeAsync(final Functions.IFunc< T> func,final java.lang.String methodName)
+    protected < T> android.os.AsyncTask  executeAsync(final BasicResponseType request,final java.lang.String methodName)
     {
         return new android.os.AsyncTask< Void, Void, OperationResult< T>>()
         {
@@ -201,8 +204,30 @@ public class ScriptSendingCallBackBinding
                 result.MethodName=methodName;
                 try
                 {
-                    result.Result= func.Func();
-                }
+                	Functions.IFunc< T> func = null;
+                	if (request instanceof BeginConversationResponseType) {
+                		func = (IFunc<T>) new Functions.IFunc< Void>()
+	                    {
+	                        @Override
+	                        public Void Func() throws java.lang.Exception {
+	                            BeginConversation( (BeginConversationResponseType) request);
+	                            return null;
+	                        }
+	                    };
+//	                } else if (request instanceof SendScriptResponseType) {
+//	                	func = (IFunc<T>)new Functions.IFunc< Void>()
+//	                    {
+//	                        @Override
+//	                        public Void Func() throws java.lang.Exception {
+//	                            SendScript( (SendScriptResponseType) request);
+//	                            return null;
+//	                        }
+//	                    };
+	                }
+                	if (func!=null)
+                		result.Result= func.Func();
+                	else
+                		throw new NullPointerException();                }
                 catch(java.lang.Exception ex)
                 {
                     ex.printStackTrace();

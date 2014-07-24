@@ -16,7 +16,6 @@ package org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.android;
 
 import java.util.List;
 
-
 import org.ksoap2.HeaderProperty;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
@@ -26,6 +25,7 @@ import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.ExtendedSoapSerializat
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions.IFunc;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.OperationResult;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.BasicRequestType;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.GetApplicationOrELFStatusRequestType;
 
 
@@ -113,7 +113,7 @@ public class SEAuditBinding
         return null;
     }
     
-    public void GetApplicationOrELFStatus(final GetApplicationOrELFStatusRequestType GetApplicationOrELFStatusRequest ) throws java.lang.Exception
+    private void GetApplicationOrELFStatus(final GetApplicationOrELFStatusRequestType GetApplicationOrELFStatusRequest ) throws java.lang.Exception
     {
         execute(new IWcfMethod()
         {
@@ -129,37 +129,40 @@ public class SEAuditBinding
             public java.lang.Object ProcessResult(ExtendedSoapSerializationEnvelope __envelope,java.lang.Object __result)throws java.lang.Exception {
                 return null;
             }
-        },"");
+        },"GetApplicationOrELFStatus");
     }
     
     public android.os.AsyncTask GetApplicationOrELFStatusAsync(final GetApplicationOrELFStatusRequestType GetApplicationOrELFStatusRequest)
     {
-        return executeAsync(new Functions.IFunc< Void>()
-        {
-            @Override
-            public Void Func() throws java.lang.Exception {
-                GetApplicationOrELFStatus( GetApplicationOrELFStatusRequest);
-                return null;
-            }
-        },"GetApplicationOrELFStatus");
+        return executeAsync(
+        		GetApplicationOrELFStatusRequest
+//        		new Functions.IFunc< Void>()
+//        {
+//            @Override
+//            public Void Func() throws java.lang.Exception {
+//                GetApplicationOrELFStatus( GetApplicationOrELFStatusRequest);
+//                return null;
+//            }
+//        }
+        		,"GetApplicationOrELFStatus");
     }
-    
-    public void GetSDFreeMemory(final String GetSDFreeMemoryRequest ) throws java.lang.Exception
-    {
-/*This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account*/
-    }
-    
-    public android.os.AsyncTask GetSDFreeMemoryAsync(final String GetSDFreeMemoryRequest)
-    {
-        return executeAsync(new Functions.IFunc< Void>()
-        {
-            @Override
-            public Void Func() throws java.lang.Exception {
-                GetSDFreeMemory( GetSDFreeMemoryRequest);
-                return null;
-            }
-        },"GetSDFreeMemory");
-    }
+    //TODO
+//    private void GetSDFreeMemory(final String GetSDFreeMemoryRequest ) throws java.lang.Exception
+//    {
+///*This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account*/
+//    }
+//    
+//    public android.os.AsyncTask GetSDFreeMemoryAsync(final String GetSDFreeMemoryRequest)
+//    {
+//        return executeAsync(new Functions.IFunc< Void>()
+//        {
+//            @Override
+//            public Void Func() throws java.lang.Exception {
+//                GetSDFreeMemory( GetSDFreeMemoryRequest);
+//                return null;
+//            }
+//        },"GetSDFreeMemory");
+//    }
     protected java.lang.Object execute(IWcfMethod wcfMethod,String methodName) throws java.lang.Exception
     {
         org.ksoap2.transport.Transport __httpTransport=createTransport();
@@ -187,7 +190,7 @@ public class SEAuditBinding
             return wcfMethod.ProcessResult(__envelope,__retObj);
         }
     }
-    protected < T> android.os.AsyncTask  executeAsync(final Functions.IFunc< T> func,final java.lang.String methodName)
+    protected < T> android.os.AsyncTask  executeAsync(final BasicRequestType req,final java.lang.String methodName)
     {
         return new android.os.AsyncTask< Void, Void, OperationResult< T>>()
         {
@@ -201,8 +204,22 @@ public class SEAuditBinding
                 result.MethodName=methodName;
                 try
                 {
-                    result.Result= func.Func();
-                }
+                	Functions.IFunc< T> func = null;
+                	if (req instanceof GetApplicationOrELFStatusRequestType) {
+                		func = (IFunc<T>) new Functions.IFunc< Void>()
+	                    {
+	                        @Override
+	                        public Void Func() throws java.lang.Exception {
+	                            GetApplicationOrELFStatus( (GetApplicationOrELFStatusRequestType) req);
+	                            return null;
+	                        }
+	                    };
+	                }
+	            	if (func!=null)
+	            		result.Result= func.Func();
+	            	else
+	            		throw new NullPointerException();                
+	            }
                 catch(java.lang.Exception ex)
                 {
                     ex.printStackTrace();

@@ -26,10 +26,14 @@ import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.ExtendedSoapSerializat
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions.IFunc;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.OperationResult;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.BasicRequestType;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.CheckMobileSubscriptionEligibilityRequestType;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.DeployServiceRequestType;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.GetMobileSubscriptionAlternateIdentifierRequestType;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.GetServiceStateRequestType;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.responses.CheckMobileSubscriptionEligibilityResponseType;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.responses.GetMobileSubscriptionAlternateIdentifierResponseType;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.responses.GetServiceStateResponseType;
 
 
 public class MobileSubscriptionInfoBinding
@@ -116,7 +120,7 @@ public class MobileSubscriptionInfoBinding
         return null;
     }
     
-    public CheckMobileSubscriptionEligibilityResponseType CheckMobileSubscriptionEligibility(final CheckMobileSubscriptionEligibilityRequestType CheckMobileSubscriptionEligibilityRequest ) throws java.lang.Exception
+    private CheckMobileSubscriptionEligibilityResponseType CheckMobileSubscriptionEligibility(final CheckMobileSubscriptionEligibilityRequestType CheckMobileSubscriptionEligibilityRequest ) throws java.lang.Exception
     {
         return (CheckMobileSubscriptionEligibilityResponseType)execute(new IWcfMethod()
         {
@@ -132,16 +136,19 @@ public class MobileSubscriptionInfoBinding
             public java.lang.Object ProcessResult(ExtendedSoapSerializationEnvelope __envelope,java.lang.Object __result)throws java.lang.Exception {
                 return (CheckMobileSubscriptionEligibilityResponseType)getResult(CheckMobileSubscriptionEligibilityResponseType.class,__result,"CheckMobileSubscriptionEligibilityResponse",__envelope);
             }
-        },"");
+        },"CheckMobileSubscriptionEligibility");
     }
     
     public android.os.AsyncTask CheckMobileSubscriptionEligibilityAsync(final CheckMobileSubscriptionEligibilityRequestType CheckMobileSubscriptionEligibilityRequest)
     {
-        return executeAsync(new Functions.IFunc< CheckMobileSubscriptionEligibilityResponseType>() {
-            public CheckMobileSubscriptionEligibilityResponseType Func() throws java.lang.Exception {
-                return CheckMobileSubscriptionEligibility( CheckMobileSubscriptionEligibilityRequest);
-            }
-        },"CheckMobileSubscriptionEligibility");
+        return executeAsync(
+        		CheckMobileSubscriptionEligibilityRequest
+//        		new Functions.IFunc< CheckMobileSubscriptionEligibilityResponseType>() {
+//            public CheckMobileSubscriptionEligibilityResponseType Func() throws java.lang.Exception {
+//                return CheckMobileSubscriptionEligibility( CheckMobileSubscriptionEligibilityRequest);
+//            }
+//        }
+        		,"CheckMobileSubscriptionEligibility");
     }
     
     public GetMobileSubscriptionAlternateIdentifierResponseType GetMobileSubscriptionAlternateIdentifier(final GetMobileSubscriptionAlternateIdentifierRequestType GetMobileSubscriptionAlternateIdentifierRequest ) throws java.lang.Exception
@@ -160,32 +167,35 @@ public class MobileSubscriptionInfoBinding
             public java.lang.Object ProcessResult(ExtendedSoapSerializationEnvelope __envelope,java.lang.Object __result)throws java.lang.Exception {
                 return (GetMobileSubscriptionAlternateIdentifierResponseType)getResult(GetMobileSubscriptionAlternateIdentifierResponseType.class,__result,"GetMobileSubscriptionAlternateIdentifierResponse",__envelope);
             }
-        },"");
+        },"GetMobileSubscriptionAlternateIdentifier");
     }
     
     public android.os.AsyncTask GetMobileSubscriptionAlternateIdentifierAsync(final GetMobileSubscriptionAlternateIdentifierRequestType GetMobileSubscriptionAlternateIdentifierRequest)
     {
-        return executeAsync(new Functions.IFunc< GetMobileSubscriptionAlternateIdentifierResponseType>() {
-            public GetMobileSubscriptionAlternateIdentifierResponseType Func() throws java.lang.Exception {
-                return GetMobileSubscriptionAlternateIdentifier( GetMobileSubscriptionAlternateIdentifierRequest);
-            }
-        },"GetMobileSubscriptionAlternateIdentifier");
+        return executeAsync(
+        		GetMobileSubscriptionAlternateIdentifierRequest
+//        		new Functions.IFunc< GetMobileSubscriptionAlternateIdentifierResponseType>() {
+//            public GetMobileSubscriptionAlternateIdentifierResponseType Func() throws java.lang.Exception {
+//                return GetMobileSubscriptionAlternateIdentifier( GetMobileSubscriptionAlternateIdentifierRequest);
+//            }
+//        }
+        		,"GetMobileSubscriptionAlternateIdentifier");
     }
-    
-    public String GetMobileSubscriptionSEIdentifiers(final String GetMobileSubscriptionSEIdentifiersRequest ) throws java.lang.Exception
-    {
-/*This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account*/
-        return null;    
-    }
-    
-    public android.os.AsyncTask GetMobileSubscriptionSEIdentifiersAsync(final String GetMobileSubscriptionSEIdentifiersRequest)
-    {
-        return executeAsync(new Functions.IFunc< String>() {
-            public String Func() throws java.lang.Exception {
-                return GetMobileSubscriptionSEIdentifiers( GetMobileSubscriptionSEIdentifiersRequest);
-            }
-        },"GetMobileSubscriptionSEIdentifiers");
-    }
+    //TODO
+//    private String GetMobileSubscriptionSEIdentifiers(final String GetMobileSubscriptionSEIdentifiersRequest ) throws java.lang.Exception
+//    {
+///*This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account*/
+//        return null;    
+//    }
+//    
+//    public android.os.AsyncTask GetMobileSubscriptionSEIdentifiersAsync(final String GetMobileSubscriptionSEIdentifiersRequest)
+//    {
+//        return executeAsync(new Functions.IFunc< String>() {
+//            public String Func() throws java.lang.Exception {
+//                return GetMobileSubscriptionSEIdentifiers( GetMobileSubscriptionSEIdentifiersRequest);
+//            }
+//        },"GetMobileSubscriptionSEIdentifiers");
+//    }
     protected java.lang.Object execute(IWcfMethod wcfMethod,String methodName) throws java.lang.Exception
     {
         org.ksoap2.transport.Transport __httpTransport=createTransport();
@@ -213,7 +223,7 @@ public class MobileSubscriptionInfoBinding
             return wcfMethod.ProcessResult(__envelope,__retObj);
         }
     }
-    protected < T> android.os.AsyncTask  executeAsync(final Functions.IFunc< T> func,final java.lang.String methodName)
+    protected < T> android.os.AsyncTask  executeAsync(final BasicRequestType request,final java.lang.String methodName)
     {
         return new android.os.AsyncTask< Void, Void, OperationResult< T>>()
         {
@@ -227,7 +237,24 @@ public class MobileSubscriptionInfoBinding
                 result.MethodName=methodName;
                 try
                 {
-                    result.Result= func.Func();
+                	Functions.IFunc< T> func = null;
+                	if (request instanceof DeployServiceRequestType) {
+                		func = (IFunc<T>) new Functions.IFunc< GetMobileSubscriptionAlternateIdentifierResponseType>() {
+                            public GetMobileSubscriptionAlternateIdentifierResponseType Func() throws java.lang.Exception {
+                                return GetMobileSubscriptionAlternateIdentifier( (GetMobileSubscriptionAlternateIdentifierRequestType) request);
+                            }
+                        };
+                	} else if (request instanceof GetServiceStateRequestType) {
+                		func = (IFunc<T>)new Functions.IFunc< CheckMobileSubscriptionEligibilityResponseType>() {
+                            public CheckMobileSubscriptionEligibilityResponseType Func() throws java.lang.Exception {
+                                return CheckMobileSubscriptionEligibility( (CheckMobileSubscriptionEligibilityRequestType) request);
+                            }
+                        };
+                	}
+                	if (func!=null)
+                		result.Result= func.Func();
+                	else
+                		throw new NullPointerException();
                 }
                 catch(java.lang.Exception ex)
                 {

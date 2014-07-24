@@ -11,11 +11,7 @@ package org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.android;
 //
 //---------------------------------------------------
 
-
-
-
 import java.util.List;
-
 
 import org.ksoap2.HeaderProperty;
 import org.ksoap2.serialization.SoapObject;
@@ -26,6 +22,7 @@ import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.ExtendedSoapSerializat
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions.IFunc;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.OperationResult;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.BasicRequestType;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.HandleSEDeviceChangedNotificationRequestType;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.HandleSEDeviceStatusChangeNotificationRequestType;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.HandleSERenewalNotificationRequestType;
@@ -109,7 +106,7 @@ public class SELifeCycleNotificationBinding
         return null;
     }
     
-    public void HandleSERenewalNotification(final HandleSERenewalNotificationRequestType HandleSERenewalNotificationRequest ) throws java.lang.Exception
+    private void HandleSERenewalNotification(final HandleSERenewalNotificationRequestType HandleSERenewalNotificationRequest ) throws java.lang.Exception
     {
         execute(new IWcfMethod()
         {
@@ -125,22 +122,25 @@ public class SELifeCycleNotificationBinding
             public java.lang.Object ProcessResult(ExtendedSoapSerializationEnvelope __envelope,java.lang.Object __result)throws java.lang.Exception {
                 return null;
             }
-        },"");
+        },"HandleSERenewalNotification");
     }
     
     public android.os.AsyncTask HandleSERenewalNotificationAsync(final HandleSERenewalNotificationRequestType HandleSERenewalNotificationRequest)
     {
-        return executeAsync(new Functions.IFunc< Void>()
-        {
-            @Override
-            public Void Func() throws java.lang.Exception {
-                HandleSERenewalNotification( HandleSERenewalNotificationRequest);
-                return null;
-            }
-        },"HandleSERenewalNotification");
+        return executeAsync(
+        		HandleSERenewalNotificationRequest
+//        		new Functions.IFunc< Void>()
+//        {
+//            @Override
+//            public Void Func() throws java.lang.Exception {
+//                HandleSERenewalNotification( HandleSERenewalNotificationRequest);
+//                return null;
+//            }
+//        }
+        		,"HandleSERenewalNotification");
     }
     
-    public void HandleSEDeviceChangedNotification(final HandleSEDeviceChangedNotificationRequestType HandleSEDeviceChangedNotificationRequest ) throws java.lang.Exception
+    private void HandleSEDeviceChangedNotification(final HandleSEDeviceChangedNotificationRequestType HandleSEDeviceChangedNotificationRequest ) throws java.lang.Exception
     {
         execute(new IWcfMethod()
         {
@@ -156,22 +156,25 @@ public class SELifeCycleNotificationBinding
             public java.lang.Object ProcessResult(ExtendedSoapSerializationEnvelope __envelope,java.lang.Object __result)throws java.lang.Exception {
                 return null;
             }
-        },"");
+        },"HandleSEDeviceChangedNotification");
     }
     
     public android.os.AsyncTask HandleSEDeviceChangedNotificationAsync(final HandleSEDeviceChangedNotificationRequestType HandleSEDeviceChangedNotificationRequest)
     {
-        return executeAsync(new Functions.IFunc< Void>()
-        {
-            @Override
-            public Void Func() throws java.lang.Exception {
-                HandleSEDeviceChangedNotification( HandleSEDeviceChangedNotificationRequest);
-                return null;
-            }
-        },"HandleSEDeviceChangedNotification");
+        return executeAsync(
+        		HandleSEDeviceChangedNotificationRequest
+//        		new Functions.IFunc< Void>()
+//        {
+//            @Override
+//            public Void Func() throws java.lang.Exception {
+//                HandleSEDeviceChangedNotification( HandleSEDeviceChangedNotificationRequest);
+//                return null;
+//            }
+//        }
+        		,"HandleSEDeviceChangedNotification");
     }
     
-    public void HandleSEDeviceStatusChangeNotification(final HandleSEDeviceStatusChangeNotificationRequestType HandleSEDeviceStatusChangeNotificationRequest ) throws java.lang.Exception
+    private void HandleSEDeviceStatusChangeNotification(final HandleSEDeviceStatusChangeNotificationRequestType HandleSEDeviceStatusChangeNotificationRequest ) throws java.lang.Exception
     {
         execute(new IWcfMethod()
         {
@@ -187,54 +190,57 @@ public class SELifeCycleNotificationBinding
             public java.lang.Object ProcessResult(ExtendedSoapSerializationEnvelope __envelope,java.lang.Object __result)throws java.lang.Exception {
                 return null;
             }
-        },"");
+        },"HandleSEDeviceStatusChangeNotification");
     }
     
     public android.os.AsyncTask HandleSEDeviceStatusChangeNotificationAsync(final HandleSEDeviceStatusChangeNotificationRequestType HandleSEDeviceStatusChangeNotificationRequest)
     {
-        return executeAsync(new Functions.IFunc< Void>()
-        {
-            @Override
-            public Void Func() throws java.lang.Exception {
-                HandleSEDeviceStatusChangeNotification( HandleSEDeviceStatusChangeNotificationRequest);
-                return null;
-            }
-        },"HandleSEDeviceStatusChangeNotification");
+        return executeAsync(
+        		HandleSEDeviceStatusChangeNotificationRequest
+//        		new Functions.IFunc< Void>()
+//        {
+//            @Override
+//            public Void Func() throws java.lang.Exception {
+//                HandleSEDeviceStatusChangeNotification( HandleSEDeviceStatusChangeNotificationRequest);
+//                return null;
+//            }
+//        }
+        		,"HandleSEDeviceStatusChangeNotification");
     }
-    
-    public void HandleSEMobileSubscriptionChangedNotification(final String HandleSEMobileSubscriptionChangedNotificationRequest ) throws java.lang.Exception
-    {
-/*This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account*/
-    }
-    
-    public android.os.AsyncTask HandleSEMobileSubscriptionChangedNotificationAsync(final String HandleSEMobileSubscriptionChangedNotificationRequest)
-    {
-        return executeAsync(new Functions.IFunc< Void>()
-        {
-            @Override
-            public Void Func() throws java.lang.Exception {
-                HandleSEMobileSubscriptionChangedNotification( HandleSEMobileSubscriptionChangedNotificationRequest);
-                return null;
-            }
-        },"HandleSEMobileSubscriptionChangedNotification");
-    }
-    
-    public void HandleSEStatusChangeNotification(final String HandleSEStatusChangeNotificationRequest ) throws java.lang.Exception
-    {
-/*This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account*/
-    }
-    
-    public android.os.AsyncTask HandleSEStatusChangeNotificationAsync(final String HandleSEStatusChangeNotificationRequest)
-    {
-        return executeAsync(new Functions.IFunc< Void>()
-        {
-            @Override
-            public Void Func() throws java.lang.Exception {
-                HandleSEStatusChangeNotification( HandleSEStatusChangeNotificationRequest);
-                return null;
-            }
-        },"HandleSEStatusChangeNotification");
-    }
+   //TODO 
+//    private void HandleSEMobileSubscriptionChangedNotification(final String HandleSEMobileSubscriptionChangedNotificationRequest ) throws java.lang.Exception
+//    {
+///*This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account*/
+//    }
+//    
+//    public android.os.AsyncTask HandleSEMobileSubscriptionChangedNotificationAsync(final String HandleSEMobileSubscriptionChangedNotificationRequest)
+//    {
+//        return executeAsync(new Functions.IFunc< Void>()
+//        {
+//            @Override
+//            public Void Func() throws java.lang.Exception {
+//                HandleSEMobileSubscriptionChangedNotification( HandleSEMobileSubscriptionChangedNotificationRequest);
+//                return null;
+//            }
+//        },"HandleSEMobileSubscriptionChangedNotification");
+//    }
+    //TODO
+//    private void HandleSEStatusChangeNotification(final String HandleSEStatusChangeNotificationRequest ) throws java.lang.Exception
+//    {
+///*This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account*/
+//    }
+//    
+//    public android.os.AsyncTask HandleSEStatusChangeNotificationAsync(final String HandleSEStatusChangeNotificationRequest)
+//    {
+//        return executeAsync(new Functions.IFunc< Void>()
+//        {
+//            @Override
+//            public Void Func() throws java.lang.Exception {
+//                HandleSEStatusChangeNotification( HandleSEStatusChangeNotificationRequest);
+//                return null;
+//            }
+//        },"HandleSEStatusChangeNotification");
+//    }
     protected java.lang.Object execute(IWcfMethod wcfMethod,String methodName) throws java.lang.Exception
     {
         org.ksoap2.transport.Transport __httpTransport=createTransport();
@@ -262,7 +268,7 @@ public class SELifeCycleNotificationBinding
             return wcfMethod.ProcessResult(__envelope,__retObj);
         }
     }
-    protected < T> android.os.AsyncTask  executeAsync(final Functions.IFunc< T> func,final java.lang.String methodName)
+    protected < T> android.os.AsyncTask  executeAsync(final BasicRequestType req,final java.lang.String methodName)
     {
         return new android.os.AsyncTask< Void, Void, OperationResult< T>>()
         {
@@ -276,9 +282,40 @@ public class SELifeCycleNotificationBinding
                 result.MethodName=methodName;
                 try
                 {
-                    result.Result= func.Func();
-                }
-                catch(java.lang.Exception ex)
+					Functions.IFunc<T> func = null;
+					if (req instanceof HandleSERenewalNotificationRequestType) {
+						func = (IFunc<T>) new Functions.IFunc< Void>()
+                    {
+                        @Override
+                        public Void Func() throws java.lang.Exception {
+                            HandleSERenewalNotification( (HandleSERenewalNotificationRequestType) req);
+                            return null;
+                        }
+                    };
+					} else if (req instanceof HandleSEDeviceChangedNotificationRequestType) {
+						func = (IFunc<T>) new Functions.IFunc< Void>()
+	                    {
+	                        @Override
+	                        public Void Func() throws java.lang.Exception {
+	                            HandleSEDeviceChangedNotification( (HandleSEDeviceChangedNotificationRequestType) req);
+	                            return null;
+	                        }
+	                    };
+					} else if (req instanceof HandleSEDeviceStatusChangeNotificationRequestType) {
+						func = (IFunc<T>) new Functions.IFunc< Void>()
+						        {
+				            @Override
+				            public Void Func() throws java.lang.Exception {
+				                HandleSEDeviceStatusChangeNotification( (HandleSEDeviceStatusChangeNotificationRequestType) req);
+				                return null;
+				            }
+				        };
+					}
+					if (func != null)
+						result.Result = func.Func();
+					else
+						throw new NullPointerException();
+				} catch(java.lang.Exception ex)
                 {
                     ex.printStackTrace();
                     result.Exception=ex;

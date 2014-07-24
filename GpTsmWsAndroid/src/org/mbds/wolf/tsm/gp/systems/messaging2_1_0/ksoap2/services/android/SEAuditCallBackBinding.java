@@ -16,7 +16,6 @@ package org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.android;
 
 import java.util.List;
 
-
 import org.ksoap2.HeaderProperty;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
@@ -24,7 +23,9 @@ import org.ksoap2.transport.HttpTransportSE;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.IServiceEvents;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.ExtendedSoapSerializationEnvelope;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions.IFunc;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.OperationResult;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.responses.BasicResponseType;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.responses.GetApplicationOrELFStatusResponseType;
 
 
@@ -112,7 +113,7 @@ public class SEAuditCallBackBinding
         return null;
     }
     
-    public void GetApplicationOrELFStatus(final GetApplicationOrELFStatusResponseType GetApplicationOrELFStatusResponse ) throws java.lang.Exception
+    private void GetApplicationOrELFStatus(final GetApplicationOrELFStatusResponseType GetApplicationOrELFStatusResponse ) throws java.lang.Exception
     {
         execute(new IWcfMethod()
         {
@@ -128,37 +129,40 @@ public class SEAuditCallBackBinding
             public java.lang.Object ProcessResult(ExtendedSoapSerializationEnvelope __envelope,java.lang.Object __result)throws java.lang.Exception {
                 return null;
             }
-        },"");
+        },"GetApplicationOrELFStatus");
     }
     
     public android.os.AsyncTask GetApplicationOrELFStatusAsync(final GetApplicationOrELFStatusResponseType GetApplicationOrELFStatusResponse)
     {
-        return executeAsync(new Functions.IFunc< Void>()
-        {
-            @Override
-            public Void Func() throws java.lang.Exception {
-                GetApplicationOrELFStatus( GetApplicationOrELFStatusResponse);
-                return null;
-            }
-        },"GetApplicationOrELFStatus");
+        return executeAsync(
+        		GetApplicationOrELFStatusResponse
+//        		new Functions.IFunc< Void>()
+//        {
+//            @Override
+//            public Void Func() throws java.lang.Exception {
+//                GetApplicationOrELFStatus( GetApplicationOrELFStatusResponse);
+//                return null;
+//            }
+//        }
+        		,"GetApplicationOrELFStatus");
     }
-    
-    public void GetSDFreeMemory(final String GetSDFreeMemoryResponse ) throws java.lang.Exception
-    {
-/*This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account*/
-    }
-    
-    public android.os.AsyncTask GetSDFreeMemoryAsync(final String GetSDFreeMemoryResponse)
-    {
-        return executeAsync(new Functions.IFunc< Void>()
-        {
-            @Override
-            public Void Func() throws java.lang.Exception {
-                GetSDFreeMemory( GetSDFreeMemoryResponse);
-                return null;
-            }
-        },"GetSDFreeMemory");
-    }
+    //TODO
+//    private void GetSDFreeMemory(final String GetSDFreeMemoryResponse ) throws java.lang.Exception
+//    {
+///*This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account*/
+//    }
+//    
+//    public android.os.AsyncTask GetSDFreeMemoryAsync(final String GetSDFreeMemoryResponse)
+//    {
+//        return executeAsync(new Functions.IFunc< Void>()
+//        {
+//            @Override
+//            public Void Func() throws java.lang.Exception {
+//                GetSDFreeMemory( GetSDFreeMemoryResponse);
+//                return null;
+//            }
+//        },"GetSDFreeMemory");
+//    }
     protected java.lang.Object execute(IWcfMethod wcfMethod,String methodName) throws java.lang.Exception
     {
         org.ksoap2.transport.Transport __httpTransport=createTransport();
@@ -186,7 +190,7 @@ public class SEAuditCallBackBinding
             return wcfMethod.ProcessResult(__envelope,__retObj);
         }
     }
-    protected < T> android.os.AsyncTask  executeAsync(final Functions.IFunc< T> func,final java.lang.String methodName)
+    protected < T> android.os.AsyncTask  executeAsync(final BasicResponseType resp,final java.lang.String methodName)
     {
         return new android.os.AsyncTask< Void, Void, OperationResult< T>>()
         {
@@ -200,7 +204,21 @@ public class SEAuditCallBackBinding
                 result.MethodName=methodName;
                 try
                 {
-                    result.Result= func.Func();
+                	Functions.IFunc< T> func = null;
+                	if (resp instanceof GetApplicationOrELFStatusResponseType) {
+                		func = (IFunc<T>) new Functions.IFunc< Void>()
+	                    {
+	                        @Override
+	                        public Void Func() throws java.lang.Exception {
+	                            GetApplicationOrELFStatus( (GetApplicationOrELFStatusResponseType) resp);
+	                            return null;
+	                        }
+	                    };
+	                }
+	            	if (func!=null)
+	            		result.Result= func.Func();
+	            	else
+	            		throw new NullPointerException();                
                 }
                 catch(java.lang.Exception ex)
                 {

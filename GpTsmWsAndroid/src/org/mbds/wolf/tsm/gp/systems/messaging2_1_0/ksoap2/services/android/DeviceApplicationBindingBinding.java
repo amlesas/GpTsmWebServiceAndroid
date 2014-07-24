@@ -148,7 +148,7 @@ public class DeviceApplicationBindingBinding
     }
     
 //TODO: NOT available!!!
-    /*    public void UnbindDeviceApplicationToSEApplication(final String UnbindDeviceApplicationToSEApplicationRequest ) throws java.lang.Exception
+    /*    private void UnbindDeviceApplicationToSEApplication(final String UnbindDeviceApplicationToSEApplicationRequest ) throws java.lang.Exception
     {
 //This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account
     }

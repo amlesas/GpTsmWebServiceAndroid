@@ -147,7 +147,7 @@ public class DeviceApplicationManagementBinding
         		,"LoadDeviceApplication");
     }
     //TODO
-/*    public void DeleteDeviceApplication(final String DeleteDeviceApplicationRequest ) throws java.lang.Exception
+/*    private void DeleteDeviceApplication(final String DeleteDeviceApplicationRequest ) throws java.lang.Exception
     {
 This feature is available in Premium account, Check http://EasyWsdl.com/Payment/PremiumAccountDetails to see all benefits of Premium account
     }

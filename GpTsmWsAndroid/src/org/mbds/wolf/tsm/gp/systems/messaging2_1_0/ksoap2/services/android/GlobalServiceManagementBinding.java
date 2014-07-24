@@ -26,6 +26,7 @@ import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.ExtendedSoapSerializat
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.Functions.IFunc;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.elements.OperationResult;
+import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.BasicRequestType;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.DeclareServiceInstanceReferenceRequestType;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.DeployServiceRequestType;
 import org.mbds.wolf.tsm.gp.systems.messaging2_1_0.ksoap2.services.types.requests.GetServiceInstanceReferenceDescriptorRequestType;
@@ -143,12 +144,12 @@ public class GlobalServiceManagementBinding
     public android.os.AsyncTask LookupServiceInstanceReferenceAsync(final LookupServiceInstanceReferenceRequestType LookupServiceInstanceReferenceRequest)
     {
         return executeAsync(
-        		//LookupServiceInstanceReferenceRequest
-        		new Functions.IFunc< LookupServiceInstanceReferenceResponseType>() {
-            public LookupServiceInstanceReferenceResponseType Func() throws java.lang.Exception {
-                return LookupServiceInstanceReference( LookupServiceInstanceReferenceRequest);
-            }
-        }
+        		LookupServiceInstanceReferenceRequest
+//        		new Functions.IFunc< LookupServiceInstanceReferenceResponseType>() {
+//            public LookupServiceInstanceReferenceResponseType Func() throws java.lang.Exception {
+//                return LookupServiceInstanceReference( LookupServiceInstanceReferenceRequest);
+//            }
+//        }
         		,"LookupServiceInstanceReference");
     }
     
@@ -173,11 +174,14 @@ public class GlobalServiceManagementBinding
     
     public android.os.AsyncTask DeclareServiceInstanceReferenceAsync(final DeclareServiceInstanceReferenceRequestType DeclareServiceInstanceReferenceRequest)
     {
-        return executeAsync(new Functions.IFunc< DeclareServiceInstanceReferenceResponseType>() {
-            public DeclareServiceInstanceReferenceResponseType Func() throws java.lang.Exception {
-                return DeclareServiceInstanceReference( DeclareServiceInstanceReferenceRequest);
-            }
-        },"DeclareServiceInstanceReference");
+        return executeAsync(
+        		DeclareServiceInstanceReferenceRequest
+//        		new Functions.IFunc< DeclareServiceInstanceReferenceResponseType>() {
+//            public DeclareServiceInstanceReferenceResponseType Func() throws java.lang.Exception {
+//                return DeclareServiceInstanceReference( DeclareServiceInstanceReferenceRequest);
+//            }
+//        }
+        		,"DeclareServiceInstanceReference");
     }
     
     private GetServiceInstanceReferenceDescriptorResponseType GetServiceInstanceReferenceDescriptor(final GetServiceInstanceReferenceDescriptorRequestType GetServiceInstanceReferenceDescriptorRequest ) throws java.lang.Exception
@@ -201,11 +205,14 @@ public class GlobalServiceManagementBinding
     
     public android.os.AsyncTask GetServiceInstanceReferenceDescriptorAsync(final GetServiceInstanceReferenceDescriptorRequestType GetServiceInstanceReferenceDescriptorRequest)
     {
-        return executeAsync(new Functions.IFunc< GetServiceInstanceReferenceDescriptorResponseType>() {
-            public GetServiceInstanceReferenceDescriptorResponseType Func() throws java.lang.Exception {
-                return GetServiceInstanceReferenceDescriptor( GetServiceInstanceReferenceDescriptorRequest);
-            }
-        },"GetServiceInstanceReferenceDescriptor");
+        return executeAsync(
+        		GetServiceInstanceReferenceDescriptorRequest
+//        		new Functions.IFunc< GetServiceInstanceReferenceDescriptorResponseType>() {
+//            public GetServiceInstanceReferenceDescriptorResponseType Func() throws java.lang.Exception {
+//                return GetServiceInstanceReferenceDescriptor( GetServiceInstanceReferenceDescriptorRequest);
+//            }
+//        }
+        		,"GetServiceInstanceReferenceDescriptor");
     }
     
     private GetServiceStateResponseType GetServiceState(final GetServiceStateRequestType GetServiceStateRequest ) throws java.lang.Exception
@@ -229,11 +236,14 @@ public class GlobalServiceManagementBinding
     
     public android.os.AsyncTask GetServiceStateAsync(final GetServiceStateRequestType GetServiceStateRequest)
     {
-        return executeAsync(new Functions.IFunc< GetServiceStateResponseType>() {
-            public GetServiceStateResponseType Func() throws java.lang.Exception {
-                return GetServiceState( GetServiceStateRequest);
-            }
-        },"GetServiceState");
+        return executeAsync(
+        		GetServiceStateRequest
+//        		new Functions.IFunc< GetServiceStateResponseType>() {
+//            public GetServiceStateResponseType Func() throws java.lang.Exception {
+//                return GetServiceState( GetServiceStateRequest);
+//            }
+//        }
+        		,"GetServiceState");
     }
     
     private void DeployService(final DeployServiceRequestType DeployServiceRequest ) throws java.lang.Exception
@@ -257,14 +267,17 @@ public class GlobalServiceManagementBinding
     
     public android.os.AsyncTask DeployServiceAsync(final DeployServiceRequestType DeployServiceRequest)
     {
-        return executeAsync(new Functions.IFunc< Void>()
-        {
-            @Override
-            public Void Func() throws java.lang.Exception {
-                DeployService( DeployServiceRequest);
-                return null;
-            }
-        },"DeployService");
+        return executeAsync(
+             		DeployServiceRequest
+//        		new Functions.IFunc< Void>()
+//        {
+//            @Override
+//            public Void Func() throws java.lang.Exception {
+//                DeployService( DeployServiceRequest);
+//                return null;
+//            }
+//        }
+        		,"DeployService");
     }
   //TODO  
 //    public void UpgradeService(final String UpgradeServiceRequest ) throws java.lang.Exception
@@ -362,7 +375,7 @@ public class GlobalServiceManagementBinding
             return wcfMethod.ProcessResult(__envelope,__retObj);
         }
     }
-    protected < T> android.os.AsyncTask  executeAsync(final Functions.IFunc< T> func,final java.lang.String methodName)
+    protected < T> android.os.AsyncTask  executeAsync(final BasicRequestType request,final java.lang.String methodName)
     {
         return new android.os.AsyncTask< Void, Void, OperationResult< T>>()
         {
@@ -376,7 +389,46 @@ public class GlobalServiceManagementBinding
                 result.MethodName=methodName;
                 try
                 {
-                    result.Result= func.Func();
+                	Functions.IFunc< T> func = null;
+                	if (request instanceof DeployServiceRequestType) {
+                		func = (IFunc<T>)new Functions.IFunc< Void>()
+                      {
+                          @Override
+                          public Void Func() throws java.lang.Exception {
+                              DeployService( (DeployServiceRequestType) request);
+                              return null;
+                          }
+                      };
+                	} else if (request instanceof GetServiceStateRequestType) {
+                		func = (IFunc<T>) new Functions.IFunc< GetServiceStateResponseType>() {
+                            public GetServiceStateResponseType Func() throws java.lang.Exception {
+                                return GetServiceState( (GetServiceStateRequestType) request);
+                            }
+                        };
+
+                	} else if (request instanceof GetServiceInstanceReferenceDescriptorRequestType) {
+                		func = (IFunc<T>)new Functions.IFunc< GetServiceInstanceReferenceDescriptorResponseType>() {
+                            public GetServiceInstanceReferenceDescriptorResponseType Func() throws java.lang.Exception {
+                                return GetServiceInstanceReferenceDescriptor( (GetServiceInstanceReferenceDescriptorRequestType) request);
+                            }
+                        };
+                	} else if (request instanceof DeclareServiceInstanceReferenceRequestType) {
+                		func = (IFunc<T>)new Functions.IFunc< DeclareServiceInstanceReferenceResponseType>() {
+                            public DeclareServiceInstanceReferenceResponseType Func() throws java.lang.Exception {
+                                return DeclareServiceInstanceReference( (DeclareServiceInstanceReferenceRequestType) request);
+                            }
+                        };
+                	} else if (request instanceof LookupServiceInstanceReferenceRequestType) {
+                		func = (IFunc<T>)new Functions.IFunc< LookupServiceInstanceReferenceResponseType>() {
+                            public LookupServiceInstanceReferenceResponseType Func() throws java.lang.Exception {
+                                return LookupServiceInstanceReference( (LookupServiceInstanceReferenceRequestType) request);
+                            }
+                        };
+                	}
+                	if (func!=null)
+                		result.Result= func.Func();
+                	else
+                		throw new NullPointerException();
                 }
                 catch(java.lang.Exception ex)
                 {
